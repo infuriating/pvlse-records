@@ -36,11 +36,12 @@ export default function Footer() {
             </div>
           </div>
           <Border size={86} />
-          <div className="flex w-40 justify-end">
+          <div className="flex w-36">
             <p className="text-sm font-bold">© 2024 PVLSE</p>
           </div>
         </div>
       </div>
+      <div className="flex lg:hidden fixed bottom-0 w-full justify-center items-center"></div>
     </>
   );
 }
