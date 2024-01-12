@@ -1,26 +1,27 @@
 import Border from "@/components/ui/border";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import Player from "./Player";
+import Player from "./player/Player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Footer() {
   return (
     <>
-      <div className="absolute bottom-0 w-full">
+      <div className="hidden lg:block absolute bottom-0 w-full">
         <Separator />
         <div className="py-4 px-6 flex items-center gap-x-6 w-full">
-          <div className="flex gap-x-4">
-            <FontAwesomeIcon icon={faXTwitter} className="h-[80px]" />
-            <FontAwesomeIcon icon={faInstagram} />
-            <FontAwesomeIcon icon={faYoutube} />
+          <div className="flex gap-x-4 justify-center items-center">
+            <FontAwesomeIcon icon={faXTwitter} className="h-[32px]" />
+            <FontAwesomeIcon icon={faInstagram} className="h-[32px]" />
+            <FontAwesomeIcon icon={faYoutube} className="h-[32px]" />
           </div>
           <Border size={86} />
           <div className="flex relative w-full">
-            <div className="h-20 border aspect-square" />
+            <Skeleton className="h-20 border aspect-square" />
             <div className="absolute bottom-0 left-24">
               <p className="text-muted-foreground text-[0.65rem]">
                 HOTTEST RELEASE
@@ -30,7 +31,7 @@ export default function Footer() {
                 <span className="text-muted-foreground">by </span>dashie & ISXRO
               </p>
             </div>
-            <div className="flex justify-center items-center absolute w-full">
+            <div className="flex justify-center items-center left-16 xl:left-0 absolute w-full">
               <Player />
             </div>
           </div>
