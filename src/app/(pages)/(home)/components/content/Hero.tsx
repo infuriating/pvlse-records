@@ -7,7 +7,7 @@ export default function Hero() {
       <p className="text-4xl font-semibold">
         We are <span className="font-black">PVLSE</span>
       </p>
-      <p className="text-base">
+      <p className="text-base max-w-[650px]">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
