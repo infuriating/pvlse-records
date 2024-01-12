@@ -5,17 +5,11 @@ import React from "react";
 
 export default function FeaturedArtist() {
   return (
-    <div className="grid place-items-center pt-12 md:pt-0 lg:place-items-end w-full pr-12">
+    <div className="grid place-items-start pt-8 md:pt-0 lg:place-items-end w-full pr-12">
       <p className="text-sm font-bold">Featured Artist</p>
       <div className="border mt-2 p-4">
-        <div className="border bg-gray-200 h-60 xl:h-96 aspect-square rounded-lg overflow-hidden">
-          <Image
-            src="/dashie.png"
-            alt="Dashie"
-            height={384}
-            width={384}
-            objectFit="cover"
-          />
+        <div className="border bg-gray-200 h-60 xl:h-96 aspect-square rounded-lg overflow-hidden object-cover">
+          <Image src="/dashie.png" alt="Dashie" height={384} width={384} />
         </div>
         <p className="font-bold text-lg pt-2 text-center">dashie</p>
         <div className="flex justify-center gap-x-4 mt-2">
