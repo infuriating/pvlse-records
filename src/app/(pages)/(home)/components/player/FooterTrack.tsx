@@ -115,7 +115,9 @@ export default function FooterTrack() {
     <div className="flex relative w-full">
       <Skeleton className="h-20 border aspect-square" />
       <div className="absolute bottom-0 left-24">
-        <p className="text-muted-foreground text-[0.65rem]">HOTTEST RELEASE</p>
+        <p className="text-muted-foreground text-[0.65rem]">
+          {track.genre.toUpperCase()}
+        </p>
         <p className="text-xl font-bold leading-5">{track.title}</p>
         <p className="text-sm">
           <span className="text-muted-foreground">by </span>
