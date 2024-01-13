@@ -7,9 +7,12 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import dynamic from "next/dynamic";
 
-const FooterTrack = dynamic(() => import("./player/FooterTrack"), {
-  ssr: false,
-});
+const FooterTrack = dynamic(
+  () => import("../app/(pages)/(home)/components/player/FooterTrack"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Footer() {
   return (
