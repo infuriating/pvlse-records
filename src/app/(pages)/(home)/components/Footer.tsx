@@ -7,6 +7,7 @@ import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { Skeleton } from "@/components/ui/skeleton";
+import FooterTrack from "./player/FooterTrack";
 
 export default function Footer() {
   return (
@@ -20,21 +21,7 @@ export default function Footer() {
             <FontAwesomeIcon icon={faYoutube} className="h-[32px]" />
           </div>
           <Border size={86} />
-          <div className="flex relative w-full">
-            <Skeleton className="h-20 border aspect-square" />
-            <div className="absolute bottom-0 left-24">
-              <p className="text-muted-foreground text-[0.65rem]">
-                HOTTEST RELEASE
-              </p>
-              <p className="text-xl font-bold leading-5">nevoa</p>
-              <p className="text-sm">
-                <span className="text-muted-foreground">by </span>dashie & ISXRO
-              </p>
-            </div>
-            <div className="flex justify-center items-center left-16 xl:left-0 absolute w-full">
-              <Player />
-            </div>
-          </div>
+          <FooterTrack />
           <Border size={86} />
           <div className="flex w-36">
             <p className="text-sm font-bold">© 2024 PVLSE</p>
