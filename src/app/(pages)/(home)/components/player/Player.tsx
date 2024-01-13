@@ -14,12 +14,20 @@ export default function Player({
   handleTrackChange,
   trackTime,
   currentTime,
+  shuffled,
+  setShuffled,
+  repeat,
+  setRepeat,
 }: {
   playing: boolean;
   togglePlayPause: () => void;
   handleTrackChange: (direction: "next" | "previous") => void;
   trackTime: number;
   currentTime: number;
+  shuffled: boolean;
+  repeat: boolean;
+  setShuffled: React.Dispatch<React.SetStateAction<boolean>>;
+  setRepeat: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const getCurrentTime = (currentTime: number) => {
     const minutes = Math.floor(currentTime / 60);
@@ -56,7 +64,15 @@ export default function Player({
         <p>{getTrackTime(trackTime)}</p>
       </div>
       <div className="flex gap-x-6 justify-center items-center">
-        <FontAwesomeIcon icon={faRedo} className="h-6 cursor-pointer" />
+        <FontAwesomeIcon
+          onClick={() => {
+            setShuffled(!shuffled);
+            setRepeat(false);
+          }}
+          icon={faRandom}
+          className={`
+        h-6 cursor-pointer ${shuffled ? "opacity-75" : "opacity-100"}`}
+        />
         <FontAwesomeIcon
           icon={faStepBackward}
           className="h-6 cursor-pointer"
@@ -68,7 +84,15 @@ export default function Player({
           className="h-6 cursor-pointer"
           onClick={() => handleTrackChange("next")}
         />
-        <FontAwesomeIcon icon={faRandom} className="h-6 cursor-pointer" />
+        <FontAwesomeIcon
+          onClick={() => {
+            setRepeat(!repeat);
+            setShuffled(false);
+          }}
+          icon={faRedo}
+          className={`
+        h-6 cursor-pointer ${repeat ? "opacity-75" : "opacity-100"}`}
+        />
       </div>
     </div>
   );

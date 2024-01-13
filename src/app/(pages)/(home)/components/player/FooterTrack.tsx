@@ -18,6 +18,8 @@ export default function FooterTrack() {
   const [trackTime, setTrackTime] = useState(0);
   const [volume, setVolume] = useState(0.025);
   const [volumeIcon, setVolumeIcon] = useState(<Volume1Icon />);
+  const [shuffled, setShuffled] = useState(false);
+  const [repeat, setRepeat] = useState(false);
 
   const audioRef = useRef(audio);
   audioRef.current.volume = volume;
@@ -68,7 +70,14 @@ export default function FooterTrack() {
     setTrackTime(0);
 
     let newTrackIndex = trackIndex;
-    if (direction === "next") {
+
+    if (shuffled) {
+      while (newTrackIndex === trackIndex) {
+        newTrackIndex = Math.floor(Math.random() * PlayerTracks.length);
+      }
+    } else if (repeat && direction === "next") {
+      newTrackIndex = trackIndex;
+    } else if (direction === "next") {
       newTrackIndex =
         trackIndex === PlayerTracks.length - 1 ? 0 : trackIndex + 1;
     } else {
@@ -127,6 +136,10 @@ export default function FooterTrack() {
           handleTrackChange={handleTrackChange}
           trackTime={audioDuration}
           currentTime={trackTime}
+          shuffled={shuffled}
+          setShuffled={setShuffled}
+          repeat={repeat}
+          setRepeat={setRepeat}
         />
       </div>
       <div className="flex gap-x-2 items-center absolute right-0 bottom-0 h-20">
