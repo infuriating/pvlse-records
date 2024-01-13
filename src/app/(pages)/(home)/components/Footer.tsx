@@ -1,13 +1,15 @@
 import Border from "@/components/ui/border";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
-import Player from "./player/Player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { Skeleton } from "@/components/ui/skeleton";
-import FooterTrack from "./player/FooterTrack";
+import dynamic from "next/dynamic";
+
+const FooterTrack = dynamic(() => import("./player/FooterTrack"), {
+  ssr: false,
+});
 
 export default function Footer() {
   return (
