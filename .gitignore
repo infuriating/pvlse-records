@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/audio/digiphunk.mp3
+public/audio/nevoa.mp3
