@@ -8,13 +8,12 @@ export default function Hero() {
         We are <span className="font-black">PVLSE</span>
       </p>
       <p className="text-base max-w-[650px] pt-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Welcome to PVLSE Records, the heartbeat of the music industry. We are a
+        platform dedicated to showcasing the most vibrant and pulsating tracks
+        from artists around the globe. Our mission is to connect music lovers
+        with the rhythms that move them, and provide a stage for artists to
+        share their unique beats. Join us as we celebrate the universal language
+        of music and feel the pulse of the global rhythm.
       </p>
     </>
   );
