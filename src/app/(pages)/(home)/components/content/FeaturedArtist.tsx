@@ -5,7 +5,7 @@ import React from "react";
 
 export default function FeaturedArtist() {
   return (
-    <div className="grid place-items-start pt-8 md:pt-0 lg:place-items-end w-full pr-12">
+    <div className="grid place-items-center pt-8 md:pt-0 md:place-items-end w-full pr-12">
       <p className="text-sm font-bold">Featured Artist</p>
       <div className="border mt-2 p-4">
         <div className="border bg-gray-200 h-60 xl:h-96 aspect-square rounded-lg overflow-hidden object-cover">
