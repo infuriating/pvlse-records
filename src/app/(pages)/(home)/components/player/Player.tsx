@@ -7,6 +7,7 @@ import { faStepBackward } from "@fortawesome/free-solid-svg-icons";
 import { faRandom } from "@fortawesome/free-solid-svg-icons";
 import { faRedo } from "@fortawesome/free-solid-svg-icons";
 import PlayPauseButton from "./PlayPauseButton";
+import TrackProgression from "./TrackProgression";
 
 export default function Player({
   playing,
@@ -49,20 +50,11 @@ export default function Player({
     return (currentTime / duration) * 100;
   };
 
+  const buttonClassNames = "h-6 cursor-pointer transition-all hover:opacity-60";
+
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="flex gap-x-2 items-center text-xs font-medium">
-        <p>{getCurrentTime(currentTime)}</p>
-        <div className="w-64">
-          <div className="relative w-full bg-muted h-2 rounded-lg">
-            <div
-              style={{ width: `${getTrackProgress(currentTime, trackTime)}%` }}
-              className="absolute bg-primary z-10 h-2 rounded-lg"
-            />
-          </div>
-        </div>
-        <p>{getTrackTime(trackTime)}</p>
-      </div>
+      <TrackProgression trackTime={trackTime} currentTime={currentTime} />
       <div className="flex gap-x-6 justify-center items-center">
         <FontAwesomeIcon
           onClick={() => {
@@ -71,17 +63,17 @@ export default function Player({
           }}
           icon={faRandom}
           className={`
-        h-6 cursor-pointer ${shuffled ? "opacity-75" : "opacity-100"}`}
+        ${buttonClassNames} ${shuffled ? "opacity-75" : "opacity-100"}`}
         />
         <FontAwesomeIcon
           icon={faStepBackward}
-          className="h-6 cursor-pointer"
+          className={buttonClassNames}
           onClick={() => handleTrackChange("previous")}
         />
         <PlayPauseButton playing={playing} togglePlayPause={togglePlayPause} />
         <FontAwesomeIcon
           icon={faStepForward}
-          className="h-6 cursor-pointer"
+          className={buttonClassNames}
           onClick={() => handleTrackChange("next")}
         />
         <FontAwesomeIcon
@@ -91,7 +83,7 @@ export default function Player({
           }}
           icon={faRedo}
           className={`
-        h-6 cursor-pointer ${repeat ? "opacity-75" : "opacity-100"}`}
+       ${buttonClassNames} ${repeat ? "opacity-75" : "opacity-100"}`}
         />
       </div>
     </div>
