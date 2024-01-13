@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { PlayerTracks } from "@/lib/player-tracks";
 import { Slider } from "@/components/ui/slider";
 import { VolumeIcon, Volume1Icon, Volume2Icon } from "lucide-react";
+import Image from "next/image";
 
 export default function FooterTrack() {
   const [playing, setPlaying] = useState(false);
@@ -113,7 +114,17 @@ export default function FooterTrack() {
 
   return (
     <div className="flex relative w-full">
-      <Skeleton className="h-20 border aspect-square" />
+      {track.coverImage ? (
+        <Image
+          src={`/track-images/${track.coverImage}`}
+          alt={track.title}
+          height={80}
+          width={80}
+          className="rounded-md h-20 border aspect-square"
+        />
+      ) : (
+        <Skeleton className="h-20 border aspect-square" />
+      )}
       <div className="absolute bottom-0 left-24">
         <p className="text-muted-foreground text-[0.65rem]">
           {track.genre.toUpperCase()}
