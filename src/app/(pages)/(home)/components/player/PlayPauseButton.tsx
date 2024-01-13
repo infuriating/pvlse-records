@@ -11,7 +11,9 @@ export default function PlayPauseButton({
   togglePlayPause: () => void;
 }) {
   return (
-    <div className="h-10 rounded-full bg-primary aspect-square flex gap-x-2 justify-center items-center">
+    <div
+      className={`h-10 rounded-full bg-primary aspect-square flex gap-x-2 justify-center items-center transition-all hover:opacity-75`}
+    >
       <FontAwesomeIcon
         onClick={togglePlayPause}
         icon={playing ? faPause : faPlay}
