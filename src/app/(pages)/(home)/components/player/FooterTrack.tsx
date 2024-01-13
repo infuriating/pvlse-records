@@ -4,6 +4,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Player from "./Player";
 import { useEffect, useRef, useState } from "react";
 import { PlayerTracks } from "@/lib/player-tracks";
+import { Slider } from "@/components/ui/slider";
+import { VolumeIcon, Volume1Icon, Volume2Icon } from "lucide-react";
 
 export default function FooterTrack() {
   const [playing, setPlaying] = useState(false);
@@ -14,9 +16,11 @@ export default function FooterTrack() {
   const [audio, setAudio] = useState(new Audio(`./audio/${track.filePath}`));
   const [audioDuration, setAudioDuration] = useState(0);
   const [trackTime, setTrackTime] = useState(0);
+  const [volume, setVolume] = useState(0.025);
+  const [volumeIcon, setVolumeIcon] = useState(<Volume1Icon />);
 
   const audioRef = useRef(audio);
-  audioRef.current.volume = 0.02;
+  audioRef.current.volume = volume;
 
   useEffect(() => {
     audioRef.current.addEventListener("timeupdate", () => {
@@ -84,6 +88,20 @@ export default function FooterTrack() {
     setPlaying(true);
   };
 
+  const handleVolumeChange = (value: number[]) => {
+    setVolume(value[0]); // update the volume state
+  };
+
+  const handleVolumeIcon = (volume: number) => {
+    if (volume === 0) {
+      setVolumeIcon(<VolumeIcon />);
+    } else if (volume < 0.05) {
+      setVolumeIcon(<Volume1Icon />);
+    } else {
+      setVolumeIcon(<Volume2Icon />);
+    }
+  };
+
   return (
     <div className="flex relative w-full">
       <Skeleton className="h-20 border aspect-square" />
@@ -109,6 +127,19 @@ export default function FooterTrack() {
           handleTrackChange={handleTrackChange}
           trackTime={audioDuration}
           currentTime={trackTime}
+        />
+      </div>
+      <div className="flex gap-x-2 items-center absolute right-0 bottom-0 h-20">
+        {volumeIcon}
+        <Slider
+          className="w-24"
+          onValueChange={(i) => {
+            handleVolumeChange(i);
+            handleVolumeIcon(i[0]);
+          }}
+          defaultValue={[volume]}
+          max={0.1}
+          step={0.001}
         />
       </div>
     </div>
