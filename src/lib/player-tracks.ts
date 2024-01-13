@@ -20,4 +20,9 @@ export const PlayerTracks: PlayerTrack[] = [
     artists: ["hatena"],
     filePath: "starryeyed.mp3",
   },
+  {
+    title: "evergreen",
+    artists: ["dashie"],
+    filePath: "evergreen.mp3",
+  },
 ];
