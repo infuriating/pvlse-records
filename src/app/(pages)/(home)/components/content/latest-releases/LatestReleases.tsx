@@ -4,7 +4,7 @@ import Track from "./Track";
 
 export default function LatestReleases() {
   return (
-    <div className="pt-8 lg:pt-16">
+    <div className="pt-8 md:pt-4">
       <p className="text-sm rounded-t-sm px-2 py-1 font-bold bg-primary w-max text-secondary">
         Latest Releases
       </p>
