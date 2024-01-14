@@ -17,7 +17,7 @@ export default function FooterTrack() {
   const [audio, setAudio] = useState(new Audio(`./audio/${track.filePath}`));
   const [audioDuration, setAudioDuration] = useState(0);
   const [trackTime, setTrackTime] = useState(0);
-  const [volume, setVolume] = useState(0.025);
+  const [volume, setVolume] = useState(0.05);
   const [volumeIcon, setVolumeIcon] = useState(<Volume1Icon />);
   const [shuffled, setShuffled] = useState(false);
   const [repeat, setRepeat] = useState(false);
@@ -26,16 +26,25 @@ export default function FooterTrack() {
   audioRef.current.volume = volume;
 
   useEffect(() => {
-    audioRef.current.addEventListener("timeupdate", () => {
-      setTrackTime(audioRef.current.currentTime);
-    });
-  }, [trackIndex]);
+    const audioCurrent = audioRef.current;
+    audioCurrent.volume = volume;
 
-  useEffect(() => {
-    audioRef.current.addEventListener("ended", () => {
+    const timeUpdateHandler = () => {
+      setTrackTime(audioCurrent.currentTime);
+    };
+
+    const endedHandler = () => {
       handleTrackChange("next");
-    });
-  }, [trackIndex]);
+    };
+
+    audioCurrent.addEventListener("timeupdate", timeUpdateHandler);
+    audioCurrent.addEventListener("ended", endedHandler);
+
+    return () => {
+      audioCurrent.removeEventListener("timeupdate", timeUpdateHandler);
+      audioCurrent.removeEventListener("ended", endedHandler);
+    };
+  }, [trackIndex, volume]);
 
   const getAudioDuration = (filePath: string): Promise<number> => {
     return new Promise((resolve, reject) => {
@@ -105,7 +114,7 @@ export default function FooterTrack() {
   const handleVolumeIcon = (volume: number) => {
     if (volume === 0) {
       setVolumeIcon(<VolumeIcon />);
-    } else if (volume < 0.05) {
+    } else if (volume < 0.1) {
       setVolumeIcon(<Volume1Icon />);
     } else {
       setVolumeIcon(<Volume2Icon />);
@@ -164,8 +173,8 @@ export default function FooterTrack() {
             handleVolumeIcon(i[0]);
           }}
           defaultValue={[volume]}
-          max={0.1}
-          step={0.001}
+          max={0.2}
+          step={0.002}
         />
       </div>
     </div>
