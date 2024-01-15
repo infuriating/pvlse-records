@@ -1,12 +1,7 @@
 import SocialIcon from "@/components/SocialIcon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { artists } from "@/lib/artists";
-import {
-  faInstagram,
-  faSoundcloud,
-  faXTwitter,
-  faSpotify,
-} from "@fortawesome/free-brands-svg-icons";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
