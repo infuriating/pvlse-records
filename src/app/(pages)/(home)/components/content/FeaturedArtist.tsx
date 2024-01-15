@@ -1,11 +1,17 @@
+"use client";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { artists } from "@/lib/artists";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SocialIcon from "@/components/SocialIcon";
+import { useQuery } from "convex/react";
+import { api } from "../../../../../../convex/_generated/api";
 
 export default function FeaturedArtist() {
+  const artists = useQuery(api.artists.getAll);
+  if (!artists) return <></>;
+
   const artist = artists[Math.floor(Math.random() * artists.length)];
 
   return (
@@ -15,7 +21,7 @@ export default function FeaturedArtist() {
         <div className="border h-60 xl:h-96 aspect-square rounded-lg overflow-hidden object-cover">
           {artist.image ? (
             <Image
-              src={`/${artist.image}`}
+              src={artist.image}
               alt={artist.name}
               height={384}
               width={384}

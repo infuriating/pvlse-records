@@ -3,18 +3,17 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import Player from "./Player";
 import { useEffect, useRef, useState } from "react";
-import { PlayerTracks } from "@/lib/player-tracks";
 import { Slider } from "@/components/ui/slider";
 import { VolumeIcon, Volume1Icon, Volume2Icon } from "lucide-react";
 import Image from "next/image";
 
-export default function FooterTrack() {
+export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
   const [playing, setPlaying] = useState(false);
   const [trackIndex, setTrackIndex] = useState(
-    Math.floor(Math.random() * PlayerTracks.length)
+    Math.floor(Math.random() * playerTracks.length)
   );
-  const [track, setTrack] = useState(PlayerTracks[trackIndex]);
-  const [audio, setAudio] = useState(new Audio(`./audio/${track.filePath}`));
+  const [track, setTrack] = useState(playerTracks[trackIndex]);
+  const [audio, setAudio] = useState(new Audio(track.filePath));
   const [audioDuration, setAudioDuration] = useState(0);
   const [trackTime, setTrackTime] = useState(0);
   const [volume, setVolume] = useState(0.05);
@@ -48,7 +47,7 @@ export default function FooterTrack() {
 
   const getAudioDuration = (filePath: string): Promise<number> => {
     return new Promise((resolve, reject) => {
-      const audio = new Audio(`./audio/${filePath}`);
+      const audio = new Audio(filePath);
       audio.onloadedmetadata = function () {
         // @ts-ignore
         resolve(this.duration);
@@ -60,13 +59,14 @@ export default function FooterTrack() {
   };
 
   useEffect(() => {
-    getAudioDuration(PlayerTracks[trackIndex].filePath)
+    getAudioDuration(playerTracks[trackIndex].filePath)
       .then((duration) => setAudioDuration(duration))
       .catch((error) => console.error(error));
-  }, [trackIndex]);
+  }, [trackIndex, playerTracks]);
 
   const togglePlayPause = () => {
     setPlaying(!playing);
+    console.log(track.filePath);
 
     if (playing) {
       audioRef.current.pause();
@@ -83,23 +83,21 @@ export default function FooterTrack() {
 
     if (shuffled) {
       while (newTrackIndex === trackIndex) {
-        newTrackIndex = Math.floor(Math.random() * PlayerTracks.length);
+        newTrackIndex = Math.floor(Math.random() * playerTracks.length);
       }
     } else if (repeat && direction === "next") {
       newTrackIndex = trackIndex;
     } else if (direction === "next") {
       newTrackIndex =
-        trackIndex === PlayerTracks.length - 1 ? 0 : trackIndex + 1;
+        trackIndex === playerTracks.length - 1 ? 0 : trackIndex + 1;
     } else {
       newTrackIndex =
-        trackIndex === 0 ? PlayerTracks.length - 1 : trackIndex - 1;
+        trackIndex === 0 ? playerTracks.length - 1 : trackIndex - 1;
     }
 
     setTrackIndex(newTrackIndex);
-    setTrack(PlayerTracks[newTrackIndex]);
-    const newAudio = new Audio(
-      `./audio/${PlayerTracks[newTrackIndex].filePath}`
-    );
+    setTrack(playerTracks[newTrackIndex]);
+    const newAudio = new Audio(playerTracks[newTrackIndex].filePath);
     setAudio(newAudio);
     audioRef.current = newAudio;
 
@@ -125,7 +123,7 @@ export default function FooterTrack() {
     <div className="flex relative w-full">
       {track.coverImage ? (
         <Image
-          src={`/track-images/${track.coverImage}`}
+          src={track.coverImage}
           alt={track.title}
           height={80}
           width={80}
@@ -141,6 +139,7 @@ export default function FooterTrack() {
         <p className="text-xl font-bold leading-5">{track.title}</p>
         <p className="text-sm">
           <span className="text-muted-foreground">by </span>
+          {/* @ts-ignore */}
           {track.artists.map((artist, index) => {
             return (
               <span key={index}>

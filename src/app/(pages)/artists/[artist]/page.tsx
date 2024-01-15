@@ -1,13 +1,19 @@
+"use client";
+
 import SocialIcon from "@/components/SocialIcon";
 import { Skeleton } from "@/components/ui/skeleton";
-import { artists } from "@/lib/artists";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useQuery } from "convex/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { api } from "../../../../../convex/_generated/api";
 
-export default function page({ params }: { params: { artist: string } }) {
+export default function Artist({ params }: { params: { artist: string } }) {
+  const artists = useQuery(api.artists.getAll);
+  if (!artists) return <></>;
+
   const artist = artists.find((artist) => artist.name === params.artist);
   if (!artist) return <>Artist not found</>;
 
@@ -25,7 +31,7 @@ export default function page({ params }: { params: { artist: string } }) {
           <div className="border h-24 xl:h-32 aspect-square rounded-lg overflow-hidden object-cover">
             {artist.image ? (
               <Image
-                src={`/${artist.image}`}
+                src={artist.image}
                 alt={artist.name}
                 height={384}
                 width={384}

@@ -1,21 +1,45 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function Track() {
+export default function Track({
+  name,
+  artists,
+  image,
+  url,
+}: {
+  name: string;
+  artists: string[];
+  image: string;
+  url: string;
+}) {
   return (
     <Link href="#">
-      <div className="bg-gray-200 border h-36 aspect-square rounded-lg overflow-hidden">
-        <Image
-          src="/dashie.png"
-          height={144}
-          width={144}
-          alt="nevoa"
-          className="object-cover h-full w-full"
-        />
+      <div className="border h-36 aspect-square rounded-lg overflow-hidden">
+        {image ? (
+          <Image
+            src={image}
+            height={144}
+            width={144}
+            alt={name}
+            className="object-cover h-full w-full"
+          />
+        ) : (
+          <Skeleton className="bg-muted-foreground h-36 border aspect-square rounded-lg" />
+        )}
       </div>
-      <p className="font-bold leading-4 pt-2">nevoa</p>
-      <p className="text-sm">dashie & ISXRO</p>
+      <p className="font-bold leading-4 pt-2">{name}</p>
+      <p className="text-sm">
+        {artists.map((artist, index) => {
+          return (
+            <span key={index}>
+              {artist}
+              {index !== artists.length - 1 && ", "}
+            </span>
+          );
+        })}
+      </p>
     </Link>
   );
 }

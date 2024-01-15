@@ -1,10 +1,16 @@
+"use client";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { artists } from "@/lib/artists";
+import { useQuery } from "convex/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { api } from "../../../../convex/_generated/api";
 
-export default function page() {
+export default function Artists() {
+  const artists = useQuery(api.artists.getAll);
+  if (!artists) return <></>;
+
   return (
     <div className="px-6 flex gap-x-6 justify-start pt-8">
       {artists.map((artist) => {
@@ -22,7 +28,7 @@ export default function page() {
               <div className="border h-24 xl:h-32 aspect-square rounded-lg overflow-hidden object-cover">
                 {artist.image ? (
                   <Image
-                    src={`/${artist.image}`}
+                    src={artist.image}
                     alt={artist.name}
                     height={384}
                     width={384}
