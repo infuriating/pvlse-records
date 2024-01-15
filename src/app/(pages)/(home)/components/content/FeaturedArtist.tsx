@@ -32,7 +32,7 @@ export default function FeaturedArtist() {
         <div className="flex justify-center gap-x-4 mt-2">
           {artist.socials.map((social) => (
             <Link key={social} href={social} target="_blank">
-              <div className="bg-muted border h-12 aspect-square rounded-full flex justify-center items-center">
+              <div className="bg-muted hover:bg-muted-foreground transition-all border h-12 aspect-square rounded-full flex justify-center items-center">
                 {social.includes("twitter") && (
                   <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
                 )}
