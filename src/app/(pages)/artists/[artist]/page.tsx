@@ -1,3 +1,4 @@
+import SocialIcon from "@/components/SocialIcon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { artists } from "@/lib/artists";
 import {
@@ -42,17 +43,7 @@ export default function page({ params }: { params: { artist: string } }) {
         <div className="w-full flex justify-center gap-x-4 mt-4">
           {artist.socials.map((social) => (
             <Link key={social} href={social} target="_blank">
-              <div className="bg-muted hover:bg-muted-foreground transition-all border h-12 aspect-square rounded-full flex justify-center items-center">
-                {social.includes("twitter") && (
-                  <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
-                )}
-                {social.includes("instagram") && (
-                  <FontAwesomeIcon icon={faInstagram} className="h-6 w-6" />
-                )}
-                {social.includes("soundcloud") && (
-                  <FontAwesomeIcon icon={faSoundcloud} className="h-6 w-6" />
-                )}
-              </div>
+              <SocialIcon social={social} />
             </Link>
           ))}
         </div>

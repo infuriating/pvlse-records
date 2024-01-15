@@ -8,6 +8,7 @@ import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import SocialIcon from "@/components/SocialIcon";
 
 export default function FeaturedArtist() {
   const artist = artists[Math.floor(Math.random() * artists.length)];
@@ -32,17 +33,7 @@ export default function FeaturedArtist() {
         <div className="flex justify-center gap-x-4 mt-2">
           {artist.socials.map((social) => (
             <Link key={social} href={social} target="_blank">
-              <div className="bg-muted hover:bg-muted-foreground transition-all border h-12 aspect-square rounded-full flex justify-center items-center">
-                {social.includes("twitter") && (
-                  <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
-                )}
-                {social.includes("instagram") && (
-                  <FontAwesomeIcon icon={faInstagram} className="h-6 w-6" />
-                )}
-                {social.includes("soundcloud") && (
-                  <FontAwesomeIcon icon={faSoundcloud} className="h-6 w-6" />
-                )}
-              </div>
+              <SocialIcon social={social} />
             </Link>
           ))}
         </div>
