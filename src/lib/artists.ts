@@ -12,8 +12,7 @@ export const artists: Artist[] = [
     description:
       "dashie is a artist from Aberdeen, Scotland. He makes mindblowing tracks surrounding genres such as hyperpop, dariacore and brazillian phonk.",
     socials: ["https://instagram.com/1dshi", "https://soundcloud.com/dshie"],
-    spotifyURL:
-      "https://open.spotify.com/artist/6Yq4YUy8Xp1o2x0f9tU9ZD?si=8f0b4d6a6e8d4b0a",
+    spotifyURL: "https://open.spotify.com/artist/6uQKiJZQe4rjkMF0HxIGTl",
     image: "dashie.png",
   },
   {
