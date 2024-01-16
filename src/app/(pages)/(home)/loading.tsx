@@ -1,5 +1,6 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import Hero from "./components/content/Hero";
+import FeaturedArtistSkeleton from "./components/loading-state/FeaturedArtistSkeleton";
+import LatestReleasesSkeleton from "./components/loading-state/LatestReleasesSkeleton";
 
 export default function loading() {
   return (
@@ -9,10 +10,10 @@ export default function loading() {
           <Hero />
         </div>
         <div className="col-span-1 row-span-4 lg:pt-4">
-          <Skeleton className="h-60 xl:h-96 w-3/4" />
+          <FeaturedArtistSkeleton />
         </div>
         <div className="col-span-1 row-span-2 flex justify-center pb-8 lg:pb-0 lg:justify-start">
-          <Skeleton className="w-3/4 h-48" />
+          <LatestReleasesSkeleton />
         </div>
       </div>
     </div>
