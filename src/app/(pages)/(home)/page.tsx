@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./components/content/Hero";
-import FeaturedArtist from "./components/content/FeaturedArtist";
-import LatestReleases from "./components/content/latest-releases/LatestReleases";
+import { FeaturedArtistWrapper } from "./components/content/featured-artist/FeaturedArtistWrapper";
+import { LatestReleasesWrapper } from "./components/content/latest-releases/LatestReleasesWrapper";
 
 export default function page() {
   return (
@@ -11,10 +11,10 @@ export default function page() {
           <Hero />
         </div>
         <div className="col-span-1 row-span-4 lg:pt-4">
-          <FeaturedArtist />
+          <FeaturedArtistWrapper />
         </div>
         <div className="col-span-1 row-span-2 flex justify-center pb-8 lg:pb-0 lg:justify-start">
-          <LatestReleases />
+          <LatestReleasesWrapper />
         </div>
       </div>
     </div>

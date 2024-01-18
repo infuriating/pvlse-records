@@ -2,11 +2,13 @@
 
 import React from "react";
 import Track from "./Track";
-import { useQuery } from "convex/react";
+import { usePreloadedQuery, Preloaded } from "convex/react";
 import { api } from "../../../../../../../convex/_generated/api";
 
-export default function LatestReleases() {
-  const tracks = useQuery(api.tracks.getAll);
+export default function LatestReleases(props: {
+  preloadedTasks: Preloaded<typeof api.tracks.getAll>;
+}) {
+  const tracks = usePreloadedQuery(props.preloadedTasks);
   if (!tracks) return <></>;
 
   const latestTracks = tracks.sort((a, b) => {

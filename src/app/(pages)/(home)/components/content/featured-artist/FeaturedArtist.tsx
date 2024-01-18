@@ -5,11 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SocialIcon from "@/components/SocialIcon";
-import { useQuery } from "convex/react";
-import { api } from "../../../../../../convex/_generated/api";
+import { Preloaded, usePreloadedQuery } from "convex/react";
+import { api } from "../../../../../../../convex/_generated/api";
 
-export default function FeaturedArtist() {
-  const artists = useQuery(api.artists.getAll);
+export default function FeaturedArtist(props: {
+  preloadedTasks: Preloaded<typeof api.artists.getAll>;
+}) {
+  const artists = usePreloadedQuery(props.preloadedTasks);
   if (!artists) return <></>;
 
   const artist = artists[Math.floor(Math.random() * artists.length)];
