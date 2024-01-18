@@ -30,26 +30,6 @@ export default function Player({
   setShuffled: React.Dispatch<React.SetStateAction<boolean>>;
   setRepeat: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const getCurrentTime = (currentTime: number) => {
-    const minutes = Math.floor(currentTime / 60);
-    const seconds = Math.floor(currentTime % 60)
-      .toString()
-      .padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  };
-
-  const getTrackTime = (trackTime: number) => {
-    const minutes = Math.floor(trackTime / 60);
-    const seconds = Math.floor(trackTime % 60)
-      .toString()
-      .padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  };
-
-  const getTrackProgress = (currentTime: number, duration: number) => {
-    return (currentTime / duration) * 100;
-  };
-
   const buttonClassNames = "h-6 cursor-pointer transition-all hover:opacity-60";
 
   return (
