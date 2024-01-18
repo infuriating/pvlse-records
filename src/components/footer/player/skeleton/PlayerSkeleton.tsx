@@ -1,36 +1,33 @@
-import Border from "@/components/ui/border";
-import { Separator } from "@/components/ui/separator";
-import {
-  faInstagram,
-  faXTwitter,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import TrackSkeleton from "./TrackSkeleton";
+"use client";
 
-export default function PlayerSkeleton() {
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faStepForward } from "@fortawesome/free-solid-svg-icons";
+import { faStepBackward } from "@fortawesome/free-solid-svg-icons";
+import { faRandom } from "@fortawesome/free-solid-svg-icons";
+import { faRedo } from "@fortawesome/free-solid-svg-icons";
+import ProgressionSkeleton from "./ProgressionSkeleton";
+
+export default function Player() {
+  const buttonClassNames = "h-6 cursor-pointer transition-all hover:opacity-60";
+
   return (
-    <>
-      <div className="hidden lg:block absolute bottom-0 w-full">
-        <Separator />
-        <div className="py-4 px-6 flex items-center gap-x-6 w-full">
-          <div className="flex gap-x-4 justify-center items-center">
-            <FontAwesomeIcon icon={faXTwitter} className="h-[32px]" />
-            <FontAwesomeIcon icon={faInstagram} className="h-[32px]" />
-            <FontAwesomeIcon icon={faYoutube} className="h-[32px]" />
-          </div>
-          <Border size={86} />
-          <div>
-            <TrackSkeleton />
-          </div>
-          <Border size={86} />
-          <div className="flex w-36">
-            <p className="text-sm font-bold">© 2024 PVLSE</p>
-          </div>
+    <div className="flex flex-col gap-y-4">
+      <ProgressionSkeleton />
+      <div className="flex gap-x-6 justify-center items-center">
+        <FontAwesomeIcon icon={faRandom} className={buttonClassNames} />
+        <FontAwesomeIcon icon={faStepBackward} className={buttonClassNames} />
+        <div
+          className={`h-10 rounded-full bg-primary aspect-square flex gap-x-2 justify-center items-center transition-all hover:opacity-75`}
+        >
+          <FontAwesomeIcon
+            icon={faPlay}
+            className={`h-6 invert transition-all cursor-pointer`}
+          />
         </div>
+        <FontAwesomeIcon icon={faStepForward} className={buttonClassNames} />
+        <FontAwesomeIcon icon={faRedo} className={buttonClassNames} />
       </div>
-      <div className="flex lg:hidden fixed bottom-0 w-full justify-center items-center"></div>
-    </>
+    </div>
   );
 }
