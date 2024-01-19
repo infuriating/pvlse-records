@@ -6,43 +6,48 @@ import { api } from "../../../../../../../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function EditArtistForm(params: {
   artist: string;
   preloadedTasks: Preloaded<typeof api.artists.getAll>;
 }) {
-  const [disabled, setDisabled] = useState(false);
+  const router = useRouter();
 
   const artist = usePreloadedQuery(params.preloadedTasks);
   const artistMutation = useMutation(api.artists.editArtist);
-  if (!artist) return <></>;
 
   const filteredArtist = artist.filter(
     (artist) => artist.name === params.artist
   )[0];
 
+  const [disabled, setDisabled] = useState(false);
+  const [data, setData] = useState({
+    name: filteredArtist.name,
+    description: filteredArtist.description,
+    socials: filteredArtist.socials,
+    spotifyURL: filteredArtist.spotifyURL,
+    image: filteredArtist.image,
+  });
+
+  if (!artist) return <></>;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-
-    const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
-    const social1 = formData.get("social1") as string;
-    const social2 = formData.get("social2") as string;
-    const social3 = formData.get("social3") as string;
-    const socials = [social1, social2, social3];
-
-    const spotifyURL = formData.get("spotifyURL") as string;
-    const image = formData.get("image") as string;
+    toast.info(`Editing artist ${filteredArtist.name}...`);
 
     await artistMutation({
-      name: name,
-      description: description,
-      socials: socials,
-      spotifyURL: spotifyURL,
-      image: image,
+      name: data.name,
+      description: data.description,
+      socials: data.socials,
+      spotifyURL: data.spotifyURL,
+      image: data.image,
     });
+
+    toast.success(`Edited artist ${data.name}!`);
+    router.push("/dashboard");
   };
 
   return (
@@ -58,7 +63,8 @@ export default function EditArtistForm(params: {
           className="mt-1 mb-3"
           type="text"
           name="name"
-          value={filteredArtist.name}
+          value={data.name}
+          onChange={(e) => setData({ ...data, name: e.target.value })}
         />
         <Label htmlFor="description">Description</Label>
         <Input
@@ -66,7 +72,8 @@ export default function EditArtistForm(params: {
           className="mt-1 mb-3"
           type="text"
           name="description"
-          value={filteredArtist.description}
+          value={data.description}
+          onChange={(e) => setData({ ...data, description: e.target.value })}
         />
         <Label htmlFor="social1">
           Socials <span className="text-muted-foreground text-xs">(url)</span>
@@ -77,19 +84,37 @@ export default function EditArtistForm(params: {
             className="mt-1"
             type="text"
             name="social1"
-            value={filteredArtist.socials[0]}
+            value={data.socials[0]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [e.target.value, data.socials[1], data.socials[2]],
+              })
+            }
           />
           <Input
             className="mt-1"
             type="text"
             name="social2"
-            value={filteredArtist.socials[1]}
+            value={data.socials[1]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [data.socials[0], e.target.value, data.socials[2]],
+              })
+            }
           />
           <Input
             className="mt-1 mb-3"
             type="text"
             name="social3"
-            value={filteredArtist.socials[2]}
+            value={data.socials[2]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [data.socials[0], data.socials[1], e.target.value],
+              })
+            }
           />
         </div>
         <Label htmlFor="spotifyURL">Spotify URL</Label>
@@ -97,7 +122,8 @@ export default function EditArtistForm(params: {
           className="mt-1 mb-3"
           type="text"
           name="spotifyURL"
-          value={filteredArtist.spotifyURL}
+          value={data.spotifyURL}
+          onChange={(e) => setData({ ...data, spotifyURL: e.target.value })}
         />
         <Button disabled={disabled} className="w-full mt-4">
           Edit Artist
