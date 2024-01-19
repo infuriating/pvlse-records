@@ -7,6 +7,10 @@ export const addRoutes = [
     path: "/dashboard/add-track",
     name: "Add Track",
   },
+  {
+    path: "/dashboard/add-player-track",
+    name: "Add Player Track",
+  },
 ];
 
 export const editRoutes = [
@@ -17,6 +21,10 @@ export const editRoutes = [
   {
     path: "/dashboard/edit-track",
     name: "Edit Track",
+  },
+  {
+    path: "/dashboard/edit-player-track",
+    name: "Edit Player Track",
   },
   {
     path: "/dashboard/update-featured-artist",
@@ -32,5 +40,9 @@ export const deleteRoutes = [
   {
     path: "/dashboard/delete-track",
     name: "Delete Track",
+  },
+  {
+    path: "/dashboard/delete-player-track",
+    name: "Delete Player Track",
   },
 ];
