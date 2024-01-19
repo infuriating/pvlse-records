@@ -9,7 +9,7 @@ import { api } from "../../../../../../../convex/_generated/api";
 import { toast } from "sonner";
 
 export default function Dashboard() {
-  const artistMutation = useMutation(api.dashboard.addArtist);
+  const artistMutation = useMutation(api.artists.addArtist);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
