@@ -35,6 +35,7 @@ export default function EditArtistForm(params: {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setDisabled(true);
 
     toast.info(`Editing artist ${filteredArtist.name}...`);
 
