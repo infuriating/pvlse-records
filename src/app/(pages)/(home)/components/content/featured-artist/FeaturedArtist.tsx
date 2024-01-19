@@ -36,11 +36,14 @@ export default function FeaturedArtist(props: {
         </Link>
         <p className="font-bold text-lg pt-2 text-center">{artist.name}</p>
         <div className="flex justify-center gap-x-4 mt-2">
-          {artist.socials.map((social) => (
-            <Link key={social} href={social} target="_blank">
-              <SocialIcon social={social} />
-            </Link>
-          ))}
+          {artist.socials.map(
+            (social) =>
+              social !== "" && (
+                <Link key={social} href={social} target="_blank">
+                  <SocialIcon social={social} />
+                </Link>
+              )
+          )}
         </div>
       </div>
     </div>

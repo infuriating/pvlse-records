@@ -45,11 +45,14 @@ export default function Artist(params: {
           </div>
         </div>
         <div className="w-full flex justify-center gap-x-4 mt-4">
-          {artist.socials.map((social) => (
-            <Link key={social} href={social} target="_blank">
-              <SocialIcon social={social} />
-            </Link>
-          ))}
+          {artist.socials.map(
+            (social) =>
+              social !== "" && (
+                <Link key={social} href={social} target="_blank">
+                  <SocialIcon social={social} />
+                </Link>
+              )
+          )}
         </div>
         {artist.spotifyURL && (
           <div className="w-full flex justify-center mt-4">
