@@ -14,39 +14,57 @@ export default function Dashboard() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    return toast.warning(
-      "Dashboard is still being worked on, nothing has been sent through"
-    );
+    let social2, social3, spotifyURL, image;
 
     const formData = new FormData(e.currentTarget);
 
     const name = formData.get("name") as string;
     const description = formData.get("description") as string;
     const social1 = formData.get("social1") as string;
-    const social2 = formData.get("social2") as string;
+    const socials = [social1];
+
+    social2 = formData.get("social2") as string;
+    social3 = formData.get("social3") as string;
+
+    social2 ? socials.push(social2) : null;
+    social3 ? socials.push(social3) : null;
+
+    spotifyURL ? formData.get("spotifyURL") : null;
+    image ? formData.get("image") : null;
+
+    toast.info(`Adding artist ${name}...`);
 
     artistMutation({
       name: name,
       description: description,
-      socials: [social1, social2],
+      socials: socials,
+      spotifyURL: spotifyURL,
     });
+
+    toast.success(`Artist ${name} has been added to the database!`);
   };
 
   return (
-    <div className="py-12 px-8">
+    <div className="py-12 px-8 lg:flex flex-col items-center">
       <p className="text-2xl font-semibold">Add an Artist</p>
-      <form className="w-1/2 pt-6" onSubmit={handleSubmit}>
+      <form
+        className="max-w-screen pt-6 lg:min-w-[920px] "
+        onSubmit={handleSubmit}
+      >
         <Label htmlFor="name">Name</Label>
         <Input required className="mt-1 mb-3" type="text" name="name" />
-        <Label htmlFor="name">Description</Label>
+        <Label htmlFor="description">Description</Label>
         <Input required className="mt-1 mb-3" type="text" name="description" />
-        <Label htmlFor="name">
+        <Label htmlFor="social1">
           Socials <span className="text-muted-foreground text-xs">(url)</span>
         </Label>
-        <div className="flex gap-x-6">
-          <Input required className="mt-1 mb-3" type="text" name="social1" />
-          <Input className="mt-1 mb-3" type="text" name="social2" />
+        <div className="flex flex-col lg:flex-row gap-x-6">
+          <Input required className="mt-1" type="text" name="social1" />
+          <Input className="mt-1" type="text" name="social2" />
+          <Input className="mt-1 mb-3" type="text" name="social3" />
         </div>
+        <Label htmlFor="spotifyURL">Spotify URL</Label>
+        <Input className="mt-1 mb-3" type="text" name="spotifyURL" />
         <Button className="w-full mt-4">Add Artist</Button>
       </form>
     </div>
