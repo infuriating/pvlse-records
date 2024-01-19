@@ -39,6 +39,9 @@ export default function EditArtistForm(params: {
 
     toast.info(`Editing artist ${filteredArtist.name}...`);
 
+    if (data.socials[1] === undefined) data.socials[1] = "";
+    if (data.socials[2] === undefined) data.socials[2] = "";
+
     await artistMutation({
       name: data.name,
       description: data.description,
