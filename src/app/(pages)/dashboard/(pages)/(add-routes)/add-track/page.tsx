@@ -11,104 +11,93 @@ import { useRouter } from "next/navigation";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { title } from "process";
 
 export default function Dashboard() {
   const [disabled, setDisabled] = useState(false);
-  const artistMutation = useMutation(api.artists.addArtist);
+  const trackMutation = useMutation(api.tracks.addTrack);
 
   const router = useRouter();
   const [data, setData] = useState({
-    name: "",
-    description: "",
-    socials: [""],
-    spotifyURL: "",
-    image: "",
+    artists: [""],
+    title: "",
+    coverImage: "",
+    url: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDisabled(true);
 
-    toast.info(`Adding artist ${name}...`);
+    toast.info(`Adding track ${title}...`);
+    console.log(data);
 
-    if (data.socials[1] === undefined) data.socials[1] = "";
-    if (data.socials[2] === undefined) data.socials[2] = "";
+    if (data.artists[1] === undefined) data.artists[1] = "";
+    if (data.artists[2] === undefined) data.artists[2] = "";
 
-    artistMutation({
-      name: data.name,
-      description: data.description,
-      socials: data.socials,
-      spotifyURL: data.spotifyURL,
-      image: data.image,
+    trackMutation({
+      artists: data.artists,
+      title: data.title,
+      coverImage: data.coverImage,
+      url: data.url,
     });
 
     router.push("/dashboard");
-    toast.success(`Artist ${name} has been added to the database!`);
+    toast.success(`Track ${title} has been added to the database!`);
   };
 
   return (
     <div className="py-12 px-8 lg:flex flex-col items-center">
-      <p className="text-2xl font-semibold">Add an Artist</p>
+      <p className="text-2xl font-semibold">Add a track</p>
       <form
         className="max-w-screen pt-6 lg:min-w-[920px] "
         onSubmit={handleSubmit}
       >
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="title">Title</Label>
         <Input
           required
           className="mt-1 mb-3"
           type="text"
-          name="name"
-          value={data.name}
-          onChange={(e) => setData({ ...data, name: e.target.value })}
+          name="title"
+          value={data.title}
+          onChange={(e) => setData({ ...data, title: e.target.value })}
         />
-        <Label htmlFor="description">Description</Label>
-        <Input
-          required
-          className="mt-1 mb-3"
-          type="text"
-          name="description"
-          value={data.description}
-          onChange={(e) => setData({ ...data, description: e.target.value })}
-        />
-        <Label htmlFor="social1">
-          Socials <span className="text-muted-foreground text-xs">(url)</span>
-        </Label>
+        <Label htmlFor="artist1">Artists</Label>
         <div className="flex flex-col lg:flex-row gap-x-6">
           <Input
             required
             className="mt-1"
             type="text"
-            name="social1"
-            value={data.socials[0]}
+            name="artistl"
+            value={data.artists[0]}
             onChange={(e) =>
               setData({
                 ...data,
-                socials: [e.target.value, data.socials[1], data.socials[2]],
+                artists: [e.target.value, data.artists[1], data.artists[2]],
               })
             }
           />
           <Input
             className="mt-1"
             type="text"
-            name="social2"
-            value={data.socials[1]}
+            name="artist2"
+            value={data.artists[1]}
             onChange={(e) =>
               setData({
                 ...data,
-                socials: [data.socials[0], e.target.value, data.socials[2]],
+                artists: [data.artists[0], e.target.value, data.artists[2]],
               })
             }
           />
           <Input
-            className="mt-1 mb-3"
+            className="mt-1"
             type="text"
-            name="social3"
-            value={data.socials[2]}
+            name="artist3"
+            value={data.artists[2]}
             onChange={(e) =>
               setData({
                 ...data,
-                socials: [data.socials[0], data.socials[1], e.target.value],
+                artists: [data.artists[0], data.artists[1], e.target.value],
               })
             }
           />
@@ -118,20 +107,25 @@ export default function Dashboard() {
           className="mt-1 mb-3"
           type="text"
           name="spotifyURL"
-          value={data.spotifyURL}
-          onChange={(e) => setData({ ...data, spotifyURL: e.target.value })}
+          value={data.url}
+          onChange={(e) => setData({ ...data, url: e.target.value })}
         />
         <div className="pt-2 w-full flex justify-center">
           <div className="flex gap-x-6 border py-2 px-4 w-max rounded-md">
-            {data.image ? (
-              <Image src={data.image} alt={data.name} height={96} width={96} />
+            {data.coverImage ? (
+              <Image
+                src={data.coverImage}
+                alt={data.title}
+                height={96}
+                width={96}
+              />
             ) : (
               <Skeleton className="h-24 w-24" />
             )}
             <UploadButton
               endpoint="imageUploader"
               onClientUploadComplete={(url) =>
-                setData({ ...data, image: url[0].url })
+                setData({ ...data, coverImage: url[0].url })
               }
             />
           </div>
