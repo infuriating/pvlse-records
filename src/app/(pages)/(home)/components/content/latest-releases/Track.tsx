@@ -31,14 +31,14 @@ export default function Track({
       </div>
       <p className="font-bold leading-5 pt-1">{name}</p>
       <p className="text-xs text-muted-foreground">
-        {artists.map((artist, index) => {
-          return (
+        {artists
+          .filter((artist) => artist)
+          .map((artist, index, self) => (
             <span key={index}>
               {artist}
-              {index !== artists.length - 1 && ", "}
+              {index !== self.length - 1 && ", "}
             </span>
-          );
-        })}
+          ))}
       </p>
     </Link>
   );

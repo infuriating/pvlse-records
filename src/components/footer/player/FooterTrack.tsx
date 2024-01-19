@@ -139,15 +139,14 @@ export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
         <p className="text-xl font-bold leading-5">{track.title}</p>
         <p className="text-sm">
           <span className="text-muted-foreground">by </span>
-          {/* @ts-ignore */}
-          {track.artists.map((artist, index) => {
-            return (
+          {track.artists
+            .filter((artist: string) => artist)
+            .map((artist: string, index: number, self: any) => (
               <span key={index}>
                 {artist}
-                {index !== track.artists.length - 1 && ", "}
+                {index !== self.length - 1 && ", "}
               </span>
-            );
-          })}
+            ))}
         </p>
       </div>
       <div className="flex justify-center items-center left-16 xl:left-0 absolute w-full">

@@ -37,12 +37,14 @@ export default function Tracks(params: {
 
             <p className="mt-2 text-2xl font-bold">{track.title}</p>
             <p className="text-muted-foreground">
-              {track.artists.map((artist, index) => (
-                <span key={index}>
-                  {artist}
-                  {index !== track.artists.length - 1 && ", "}
-                </span>
-              ))}
+              {track.artists
+                .filter((artist) => artist)
+                .map((artist, index, self) => (
+                  <span key={index}>
+                    {artist}
+                    {index !== self.length - 1 && ", "}
+                  </span>
+                ))}
             </p>
           </div>
         </Link>
