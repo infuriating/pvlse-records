@@ -14,36 +14,29 @@ export default function Dashboard() {
   const artistMutation = useMutation(api.artists.addArtist);
 
   const router = useRouter();
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    socials: [""],
+    spotifyURL: "",
+    image: "",
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setDisabled(true);
 
-    let social2, social3, spotifyURL, image;
-
-    const formData = new FormData(e.currentTarget);
-
-    const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
-    const social1 = formData.get("social1") as string;
-    const socials = [social1];
-
-    social2 = formData.get("social2") as string;
-    social3 = formData.get("social3") as string;
-
-    social2 ? socials.push(social2) : null;
-    social3 ? socials.push(social3) : null;
-
-    spotifyURL ? formData.get("spotifyURL") : null;
-    image ? formData.get("image") : null;
-
     toast.info(`Adding artist ${name}...`);
 
+    if (data.socials[1] === undefined) data.socials[1] = "";
+    if (data.socials[2] === undefined) data.socials[2] = "";
+
     artistMutation({
-      name: name,
-      description: description,
-      socials: socials,
-      spotifyURL: spotifyURL,
+      name: data.name,
+      description: data.description,
+      socials: data.socials,
+      spotifyURL: data.spotifyURL,
+      image: data.image,
     });
 
     router.push("/dashboard");
@@ -58,19 +51,73 @@ export default function Dashboard() {
         onSubmit={handleSubmit}
       >
         <Label htmlFor="name">Name</Label>
-        <Input required className="mt-1 mb-3" type="text" name="name" />
+        <Input
+          required
+          className="mt-1 mb-3"
+          type="text"
+          name="name"
+          value={data.name}
+          onChange={(e) => setData({ ...data, name: e.target.value })}
+        />
         <Label htmlFor="description">Description</Label>
-        <Input required className="mt-1 mb-3" type="text" name="description" />
+        <Input
+          required
+          className="mt-1 mb-3"
+          type="text"
+          name="description"
+          value={data.description}
+          onChange={(e) => setData({ ...data, description: e.target.value })}
+        />
         <Label htmlFor="social1">
           Socials <span className="text-muted-foreground text-xs">(url)</span>
         </Label>
         <div className="flex flex-col lg:flex-row gap-x-6">
-          <Input required className="mt-1" type="text" name="social1" />
-          <Input className="mt-1" type="text" name="social2" />
-          <Input className="mt-1 mb-3" type="text" name="social3" />
+          <Input
+            required
+            className="mt-1"
+            type="text"
+            name="social1"
+            value={data.socials[0]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [e.target.value, data.socials[1], data.socials[2]],
+              })
+            }
+          />
+          <Input
+            className="mt-1"
+            type="text"
+            name="social2"
+            value={data.socials[1]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [data.socials[0], e.target.value, data.socials[2]],
+              })
+            }
+          />
+          <Input
+            className="mt-1 mb-3"
+            type="text"
+            name="social3"
+            value={data.socials[2]}
+            onChange={(e) =>
+              setData({
+                ...data,
+                socials: [data.socials[0], data.socials[1], e.target.value],
+              })
+            }
+          />
         </div>
         <Label htmlFor="spotifyURL">Spotify URL</Label>
-        <Input className="mt-1 mb-3" type="text" name="spotifyURL" />
+        <Input
+          className="mt-1 mb-3"
+          type="text"
+          name="spotifyURL"
+          value={data.spotifyURL}
+          onChange={(e) => setData({ ...data, spotifyURL: e.target.value })}
+        />
         <Button disabled={disabled} className="w-full mt-4">
           Add Artist
         </Button>
