@@ -51,8 +51,6 @@ export const editArtist = mutation(
       .filter((q) => q.eq(q.field("name"), name))
       .first();
 
-    console.log(name);
-
     if (!document) return;
 
     document.name = name;
