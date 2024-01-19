@@ -28,3 +28,39 @@ export const addArtist = mutation({
     return artist;
   },
 });
+
+export const editArtist = mutation(
+  async (
+    { db },
+    {
+      name,
+      description,
+      socials,
+      image,
+      spotifyURL,
+    }: {
+      name: string;
+      description: string;
+      socials: string[];
+      image: string | undefined;
+      spotifyURL: string | undefined;
+    }
+  ) => {
+    const document = await db
+      .query("artist")
+      .filter((q) => q.eq(q.field("name"), name))
+      .first();
+
+    console.log(name);
+
+    if (!document) return;
+
+    document.name = name;
+    document.description = description;
+    document.socials = socials;
+    document.image = image;
+    document.spotifyURL = spotifyURL;
+
+    await db.replace(document._id, document);
+  }
+);
