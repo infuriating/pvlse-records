@@ -29,8 +29,8 @@ export default function Track({
           <Skeleton className="bg-muted-foreground h-36 border aspect-square rounded-lg" />
         )}
       </div>
-      <p className="font-bold leading-4 pt-2">{name}</p>
-      <p className="text-sm">
+      <p className="font-bold leading-5 pt-1">{name}</p>
+      <p className="text-xs text-muted-foreground">
         {artists.map((artist, index) => {
           return (
             <span key={index}>
