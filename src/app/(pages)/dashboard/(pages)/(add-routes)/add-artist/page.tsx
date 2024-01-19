@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { api } from "../../../../../../../convex/_generated/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { UploadButton } from "@/utils/uploadthing";
+import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
   const [disabled, setDisabled] = useState(false);
@@ -118,6 +121,21 @@ export default function Dashboard() {
           value={data.spotifyURL}
           onChange={(e) => setData({ ...data, spotifyURL: e.target.value })}
         />
+        <div className="pt-2 w-full flex justify-center">
+          <div className="flex gap-x-6 border py-2 px-4 w-max rounded-md">
+            {data.image ? (
+              <Image src={data.image} alt={data.name} height={96} width={96} />
+            ) : (
+              <Skeleton className="h-24 w-24" />
+            )}
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(url) =>
+                setData({ ...data, image: url[0].url })
+              }
+            />
+          </div>
+        </div>
         <Button disabled={disabled} className="w-full mt-4">
           Add Artist
         </Button>
