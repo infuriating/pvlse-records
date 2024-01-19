@@ -6,16 +6,20 @@ import React from "react";
 
 export default function SocialIcon({ social }: { social: string }) {
   return (
-    <div className="bg-muted hover:bg-muted-foreground transition-all border h-12 aspect-square rounded-full flex justify-center items-center">
-      {social.includes("twitter") && (
-        <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
+    <>
+      {social !== "" && (
+        <div className="bg-muted hover:bg-muted-foreground transition-all border h-12 aspect-square rounded-full flex justify-center items-center">
+          {social.includes("twitter") && (
+            <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
+          )}
+          {social.includes("instagram") && (
+            <FontAwesomeIcon icon={faInstagram} className="h-6 w-6" />
+          )}
+          {social.includes("soundcloud") && (
+            <FontAwesomeIcon icon={faSoundcloud} className="h-6 w-6" />
+          )}
+        </div>
       )}
-      {social.includes("instagram") && (
-        <FontAwesomeIcon icon={faInstagram} className="h-6 w-6" />
-      )}
-      {social.includes("soundcloud") && (
-        <FontAwesomeIcon icon={faSoundcloud} className="h-6 w-6" />
-      )}
-    </div>
+    </>
   );
 }
