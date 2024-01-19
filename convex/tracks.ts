@@ -33,3 +33,47 @@ export const addTrack = mutation({
     return track;
   },
 });
+
+export const editTrack = mutation(
+  async (
+    { db },
+    {
+      artists,
+      title,
+      coverImage,
+      url,
+    }: {
+      artists: string[];
+      title: string;
+      coverImage: string | undefined;
+      url: string | undefined;
+    }
+  ) => {
+    const document = await db
+      .query("track")
+      .filter((q) => q.eq(q.field("title"), title))
+      .first();
+
+    if (!document) return;
+
+    document.artists = artists;
+    document.title = title;
+    document.coverImage = coverImage;
+    document.url = url;
+
+    await db.replace(document._id, document);
+  }
+);
+
+export const deleteTrack = mutation(
+  async ({ db }, { title }: { title: string }) => {
+    const document = await db
+      .query("track")
+      .filter((q) => q.eq(q.field("title"), title))
+      .first();
+
+    if (!document) return;
+
+    await db.delete(document._id);
+  }
+);
