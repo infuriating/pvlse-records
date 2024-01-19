@@ -64,3 +64,16 @@ export const editArtist = mutation(
     await db.replace(document._id, document);
   }
 );
+
+export const deleteArtist = mutation(
+  async ({ db }, { name }: { name: string }) => {
+    const document = await db
+      .query("artist")
+      .filter((q) => q.eq(q.field("name"), name))
+      .first();
+
+    if (!document) return;
+
+    await db.delete(document._id);
+  }
+);
