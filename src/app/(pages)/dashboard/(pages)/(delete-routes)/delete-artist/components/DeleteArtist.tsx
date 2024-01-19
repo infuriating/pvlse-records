@@ -7,7 +7,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { api } from "../../../../../../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import DeleteDialog from "./DeleteArtistDialog";
 
 export default function DeleteArtist(props: {
   preloadedTasks: Preloaded<typeof api.artists.getAll>;
