@@ -1,18 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "convex/react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { api } from "../../../../../../../convex/_generated/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
+  const [disabled, setDisabled] = useState(false);
   const artistMutation = useMutation(api.artists.addArtist);
+
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setDisabled(true);
 
     let social2, social3, spotifyURL, image;
 
@@ -41,6 +46,7 @@ export default function Dashboard() {
       spotifyURL: spotifyURL,
     });
 
+    router.push("/dashboard");
     toast.success(`Artist ${name} has been added to the database!`);
   };
 
@@ -65,7 +71,9 @@ export default function Dashboard() {
         </div>
         <Label htmlFor="spotifyURL">Spotify URL</Label>
         <Input className="mt-1 mb-3" type="text" name="spotifyURL" />
-        <Button className="w-full mt-4">Add Artist</Button>
+        <Button disabled={disabled} className="w-full mt-4">
+          Add Artist
+        </Button>
       </form>
     </div>
   );
