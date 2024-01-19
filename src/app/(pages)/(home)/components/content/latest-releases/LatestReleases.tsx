@@ -6,7 +6,7 @@ import { usePreloadedQuery, Preloaded } from "convex/react";
 import { api } from "../../../../../../../convex/_generated/api";
 
 export default function LatestReleases(props: {
-  preloadedTasks: Preloaded<typeof api.tracks.getAll>;
+  preloadedTasks: Preloaded<typeof api.tracks.getLatestFour>;
 }) {
   const tracks = usePreloadedQuery(props.preloadedTasks);
   if (!tracks) return <></>;

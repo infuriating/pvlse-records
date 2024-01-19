@@ -6,3 +6,10 @@ export const getAll = query({
     return await ctx.db.query("track").collect();
   },
 });
+
+export const getLatestFour = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("track").order("desc").take(4);
+  },
+});
