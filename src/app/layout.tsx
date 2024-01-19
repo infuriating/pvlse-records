@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import ConvexClientProvider from "./ConvexClientProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +23,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConvexClientProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
-            {children}
-            <Footer />
-            <Toaster />
-          </ThemeProvider>
-        </ConvexClientProvider>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              footerAction: {
+                display: "none",
+              },
+            },
+          }}
+        >
+          <ConvexClientProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Header />
+              {children}
+              <Footer />
+              <Toaster />
+            </ThemeProvider>
+          </ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
