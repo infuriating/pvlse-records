@@ -131,7 +131,7 @@ export default function Dashboard() {
           </div>
         </div>
         <Button disabled={disabled} className="w-full mt-4">
-          Add Artist
+          Add Track
         </Button>
       </form>
     </div>
