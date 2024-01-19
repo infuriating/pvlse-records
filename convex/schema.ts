@@ -22,4 +22,9 @@ export default defineSchema({
     title: v.string(),
     url: v.optional(v.string()),
   }),
+  featured_artist: defineTable({
+    image: v.optional(v.string()),
+    name: v.string(),
+    socials: v.array(v.string()),
+  }),
 });

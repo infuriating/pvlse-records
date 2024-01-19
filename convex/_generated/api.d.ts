@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as artists from "../artists.js";
+import type * as featuredArtist from "../featuredArtist.js";
 import type * as playerTracks from "../playerTracks.js";
 import type * as tracks from "../tracks.js";
 
@@ -28,6 +29,7 @@ import type * as tracks from "../tracks.js";
  */
 declare const fullApi: ApiFromModules<{
   artists: typeof artists;
+  featuredArtist: typeof featuredArtist;
   playerTracks: typeof playerTracks;
   tracks: typeof tracks;
 }>;
