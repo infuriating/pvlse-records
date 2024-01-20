@@ -19,6 +19,7 @@ export const addTrack = mutation({
   args: {
     artists: v.array(v.string()),
     title: v.string(),
+    genre: v.string(),
     coverImage: v.optional(v.string()),
     url: v.optional(v.string()),
   },
@@ -26,6 +27,7 @@ export const addTrack = mutation({
     const track = await ctx.db.insert("track", {
       artists: args.artists,
       title: args.title,
+      genre: args.genre,
       coverImage: args.coverImage,
       url: args.url,
     });
@@ -40,11 +42,13 @@ export const editTrack = mutation(
     {
       artists,
       title,
+      genre,
       coverImage,
       url,
     }: {
       artists: string[];
       title: string;
+      genre: string;
       coverImage: string | undefined;
       url: string | undefined;
     }
@@ -58,6 +62,7 @@ export const editTrack = mutation(
 
     document.artists = artists;
     document.title = title;
+    document.genre = genre;
     document.coverImage = coverImage;
     document.url = url;
 

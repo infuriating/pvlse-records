@@ -19,8 +19,9 @@ export default defineSchema({
   track: defineTable({
     artists: v.array(v.string()),
     coverImage: v.optional(v.string()),
-    title: v.string(),
     url: v.optional(v.string()),
+    genre: v.string(),
+    title: v.string(),
   }),
   featured_artist: defineTable({
     image: v.optional(v.string()),
