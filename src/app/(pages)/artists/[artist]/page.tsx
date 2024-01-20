@@ -10,5 +10,12 @@ export default async function ArtistWrapper({
   const artist = params.artist.replaceAll("%20", " ");
 
   const preloadedTasks = await preloadQuery(api.artists.getAll);
-  return <Artist artist={artist} preloadedTasks={preloadedTasks} />;
+  const preloadedTracks = await preloadQuery(api.tracks.getAll);
+  return (
+    <Artist
+      artist={artist}
+      preloadedTasks={preloadedTasks}
+      preloadedTracks={preloadedTracks}
+    />
+  );
 }
