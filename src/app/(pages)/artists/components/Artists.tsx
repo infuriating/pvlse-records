@@ -6,6 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { api } from "../../../../../convex/_generated/api";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SocialIcon from "@/components/SocialIcon";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons";
+import { Button } from "@/components/ui/button";
 
 export default function Artists(props: {
   preloadedTasks: Preloaded<typeof api.artists.getAll>;
@@ -14,33 +24,35 @@ export default function Artists(props: {
   if (!artists) return <></>;
 
   return (
-    <div className="px-6 flex gap-x-6 justify-start pt-8">
+    <div className="place-items-center md:place-items-start px-6 gap-x-6 gap-y-4 grid grid-auto-fit-xl pt-8">
       {artists.map((artist) => {
         return (
-          <Link
-            href={`/artists/${artist.name}`}
-            className="p-2 rounded-lg bg-primary-foreground aspect-[1.4/1] min-w-64 max-w-96 flex justify-start items-start flex-col"
-            key={artist.name}
-          >
-            <p className="text-2xl font-bold">{artist.name}</p>
-            <p className="pt-1 pb-2 text-muted-foreground text-sm">
-              {artist.description}
-            </p>
-            <div className="flex w-full justify-center">
-              <div className="border h-24 xl:h-32 aspect-square rounded-lg overflow-hidden object-cover">
-                {artist.image ? (
-                  <Image
-                    src={artist.image}
-                    alt={artist.name}
-                    height={384}
-                    width={384}
-                  />
-                ) : (
-                  <Skeleton className="h-full" />
-                )}
-              </div>
-            </div>
-          </Link>
+          <Card key={artist.name} className="w-96">
+            <CardHeader>
+              {artist.image ? (
+                <Image
+                  className="h-32 w-32 rounded-xl object-cover border"
+                  src={artist.image}
+                  alt={artist.name}
+                  width={384}
+                  height={384}
+                />
+              ) : (
+                <Skeleton className="h-32 w-32" />
+              )}
+            </CardHeader>
+            <CardContent>
+              <h2 className="text-2xl font-bold">{artist.name}</h2>
+              <p className="text-sm text-muted-foreground line-clamp-1">
+                {artist.description}
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Link href={`/artists/${artist.name}`}>
+                <Button className="outline">View more</Button>
+              </Link>
+            </CardFooter>
+          </Card>
         );
       })}
     </div>
