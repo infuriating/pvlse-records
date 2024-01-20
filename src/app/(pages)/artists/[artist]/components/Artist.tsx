@@ -13,15 +13,12 @@ import { CardContent, CardFooter, Card } from "@/components/ui/card";
 
 export default function Artist(params: {
   artist: string;
-  preloadedTasks: Preloaded<typeof api.artists.getAll>;
+  preloadedTasks: Preloaded<typeof api.artists.getArtist>;
   preloadedTracks: Preloaded<typeof api.tracks.getAll>;
 }) {
-  const artists = usePreloadedQuery(params.preloadedTasks);
+  const artist = usePreloadedQuery(params.preloadedTasks);
   const tracks = usePreloadedQuery(params.preloadedTracks);
-  if (!artists) return <></>;
-
-  const artist = artists.find((artist) => artist.name === params.artist);
-  if (!artist) return <>Artist not found</>;
+  if (!artist) return <></>;
 
   const artistTracks = tracks.filter((track) =>
     track.artists.includes(artist.name)
