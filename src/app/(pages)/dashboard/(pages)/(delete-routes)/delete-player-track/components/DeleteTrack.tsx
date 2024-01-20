@@ -9,7 +9,7 @@ import { api } from "../../../../../../../../convex/_generated/api";
 import { Button } from "@/components/ui/button";
 
 export default function DeleteTrack(props: {
-  preloadedTasks: Preloaded<typeof api.tracks.getAll>;
+  preloadedTasks: Preloaded<typeof api.playerTracks.getAll>;
 }) {
   const tracks = usePreloadedQuery(props.preloadedTasks);
   if (!tracks) return <></>;
@@ -19,7 +19,7 @@ export default function DeleteTrack(props: {
       {tracks.map((track) => {
         return (
           <Link
-            href={`/dashboard/delete-track/${track.title}`}
+            href={`/dashboard/delete-player-track/${track.title}`}
             className="p-2 rounded-lg bg-primary-foreground aspect-[1.4/1] min-w-64 max-w-96 flex justify-center items-center flex-col"
             key={track.title}
           >
