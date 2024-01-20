@@ -35,6 +35,7 @@ export default function EditTrackForm(params: {
   const [disabled, setDisabled] = useState(false);
   const [data, setData] = useState({
     title: filteredTrack.title,
+    genre: filteredTrack.genre,
     artists: filteredTrack.artists,
     coverImage: filteredTrack.coverImage,
     url: filteredTrack.url,
@@ -53,6 +54,7 @@ export default function EditTrackForm(params: {
 
     await trackMutation({
       title: data.title,
+      genre: data.genre,
       artists: data.artists,
       url: data.url,
       coverImage: data.coverImage,
@@ -84,6 +86,16 @@ export default function EditTrackForm(params: {
               name="name"
               value={data.title}
               onChange={(e) => setData({ ...data, title: e.target.value })}
+            />
+            <Label htmlFor="genre">Genre</Label>
+            <Input
+              required
+              className="mt-1 mb-3"
+              type="text"
+              name="genre"
+              value={data.genre}
+              placeholder="Track Genre"
+              onChange={(e) => setData({ ...data, genre: e.target.value })}
             />
             <Label htmlFor="artist1">Artists</Label>
             <div className="flex flex-col lg:flex-row gap-x-6">

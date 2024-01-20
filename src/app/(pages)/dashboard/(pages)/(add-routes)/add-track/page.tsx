@@ -27,6 +27,7 @@ export default function Dashboard() {
   const [data, setData] = useState({
     artists: [""],
     title: "",
+    genre: "",
     coverImage: "",
     url: "",
   });
@@ -44,6 +45,7 @@ export default function Dashboard() {
     trackMutation({
       artists: data.artists,
       title: data.title,
+      genre: data.genre,
       coverImage: data.coverImage,
       url: data.url,
     });
@@ -73,6 +75,16 @@ export default function Dashboard() {
               value={data.title}
               placeholder="Track Title"
               onChange={(e) => setData({ ...data, title: e.target.value })}
+            />
+            <Label htmlFor="genre">Genre</Label>
+            <Input
+              required
+              className="mt-1 mb-3"
+              type="text"
+              name="genre"
+              value={data.genre}
+              placeholder="Track Genre"
+              onChange={(e) => setData({ ...data, genre: e.target.value })}
             />
             <Label htmlFor="artist1">Artists</Label>
             <div className="flex flex-col lg:flex-row gap-x-6">
