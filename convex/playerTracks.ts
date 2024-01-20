@@ -29,6 +29,20 @@ export const addPlayerTrack = mutation({
   },
 });
 
+export const getPlayerTrack = query({
+  args: { title: v.string() },
+  handler: async (ctx, args) => {
+    const document = await ctx.db
+      .query("player_track")
+      .filter((q) => q.eq(q.field("title"), args.title))
+      .first();
+
+    if (!document) return;
+
+    return document;
+  },
+});
+
 export const editPlayerTrack = mutation(
   async (
     { db },
