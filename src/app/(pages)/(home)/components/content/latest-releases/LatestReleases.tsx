@@ -32,6 +32,7 @@ export default function LatestReleases(props: {
               image={track.coverImage}
               // @ts-ignore
               url={track.url}
+              genre={track.genre}
             />
           );
         })}

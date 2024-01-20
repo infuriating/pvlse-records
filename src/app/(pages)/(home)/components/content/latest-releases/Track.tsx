@@ -8,14 +8,16 @@ export default function Track({
   artists,
   image,
   url,
+  genre,
 }: {
   name: string;
   artists: string[];
   image: string;
   url: string;
+  genre: string;
 }) {
   return (
-    <Link href="#">
+    <Link href={`/tracks/${name}`}>
       <div className="border h-36 aspect-square rounded-lg overflow-hidden">
         {image ? (
           <Image
@@ -30,7 +32,7 @@ export default function Track({
         )}
       </div>
       <p className="font-bold leading-5 pt-1">{name}</p>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs">
         {artists
           .filter((artist) => artist)
           .map((artist, index, self) => (
@@ -40,6 +42,7 @@ export default function Track({
             </span>
           ))}
       </p>
+      <p className="text-xs text-muted-foreground">{genre.toUpperCase()}</p>
     </Link>
   );
 }
