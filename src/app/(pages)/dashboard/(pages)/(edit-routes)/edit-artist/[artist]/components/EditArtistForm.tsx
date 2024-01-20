@@ -21,24 +21,20 @@ import {
 
 export default function EditArtistForm(params: {
   artist: string;
-  preloadedTasks: Preloaded<typeof api.artists.getAll>;
+  preloadedTasks: Preloaded<typeof api.artists.getArtist>;
 }) {
   const router = useRouter();
 
   const artist = usePreloadedQuery(params.preloadedTasks);
   const artistMutation = useMutation(api.artists.editArtist);
 
-  const filteredArtist = artist.filter(
-    (artist) => artist.name === params.artist
-  )[0];
-
   const [disabled, setDisabled] = useState(false);
   const [data, setData] = useState({
-    name: filteredArtist.name,
-    description: filteredArtist.description,
-    socials: filteredArtist.socials,
-    spotifyURL: filteredArtist.spotifyURL,
-    image: filteredArtist.image,
+    name: artist?.name || "",
+    description: artist?.description || "",
+    socials: artist?.socials || ["", "", ""],
+    spotifyURL: artist?.spotifyURL || "",
+    image: artist?.image || "",
   });
 
   if (!artist) return <></>;
@@ -47,7 +43,7 @@ export default function EditArtistForm(params: {
     e.preventDefault();
     setDisabled(true);
 
-    toast.info(`Editing artist ${filteredArtist.name}...`);
+    toast.info(`Editing artist ${artist.name}...`);
 
     if (data.socials[1] === undefined) data.socials[1] = "";
     if (data.socials[2] === undefined) data.socials[2] = "";

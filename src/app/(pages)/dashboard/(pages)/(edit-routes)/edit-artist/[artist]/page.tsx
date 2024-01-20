@@ -9,6 +9,8 @@ export default async function ArtistWrapper({
 }) {
   const artist = params.artist.replaceAll("%20", " ");
 
-  const preloadedTasks = await preloadQuery(api.artists.getAll);
+  const preloadedTasks = await preloadQuery(api.artists.getArtist, {
+    name: artist,
+  });
   return <EditArtistForm artist={artist} preloadedTasks={preloadedTasks} />;
 }
