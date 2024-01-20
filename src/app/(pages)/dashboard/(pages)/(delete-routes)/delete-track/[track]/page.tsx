@@ -9,7 +9,9 @@ export default async function TrackWrapper({
 }) {
   const track = params.track.replaceAll("%20", " ");
 
-  const preloadedTasks = await preloadQuery(api.tracks.getAll);
+  const preloadedTasks = await preloadQuery(api.tracks.getTrack, {
+    title: track,
+  });
   return (
     <DeleteTrackConfirmation track={track} preloadedTasks={preloadedTasks} />
   );

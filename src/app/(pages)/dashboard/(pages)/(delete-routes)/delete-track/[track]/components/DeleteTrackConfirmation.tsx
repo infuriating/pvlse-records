@@ -10,16 +10,12 @@ import Link from "next/link";
 
 export default function DeleteTrackConfirmation(params: {
   track: string;
-  preloadedTasks: Preloaded<typeof api.tracks.getAll>;
+  preloadedTasks: Preloaded<typeof api.tracks.getTrack>;
 }) {
   const router = useRouter();
 
   const track = usePreloadedQuery(params.preloadedTasks);
   const trackMutation = useMutation(api.tracks.deleteTrack);
-
-  const filteredTrack = track.filter(
-    (track) => track.title === params.track
-  )[0];
 
   const [disabled, setDisabled] = useState(false);
 
@@ -29,12 +25,12 @@ export default function DeleteTrackConfirmation(params: {
     e.preventDefault();
     setDisabled(true);
 
-    toast.info(`Deleting artist ${filteredTrack.title}...`);
+    toast.info(`Deleting artist ${track.title}...`);
     trackMutation({
-      title: filteredTrack.title,
+      title: track.title,
     });
 
-    toast.success(`Deleted artist ${filteredTrack.title}!`);
+    toast.success(`Deleted artist ${track.title}!`);
     router.push("/dashboard");
   };
 
@@ -42,7 +38,7 @@ export default function DeleteTrackConfirmation(params: {
     <div className="flex flex-col items-center py-6 px-12">
       <p className="font-semibold text-center text-lg lg:text-4xl">
         Are you sure that you want to delete track{" "}
-        <span className="font-bold">{filteredTrack.title}</span>?
+        <span className="font-bold">{track.title}</span>?
       </p>
       <p className="lg:text-2xl font-medium text-muted-foreground">
         This action cannot be undone.
