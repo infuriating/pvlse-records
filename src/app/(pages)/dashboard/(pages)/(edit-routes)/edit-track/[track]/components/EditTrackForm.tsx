@@ -21,24 +21,20 @@ import {
 
 export default function EditTrackForm(params: {
   track: string;
-  preloadedTasks: Preloaded<typeof api.tracks.getAll>;
+  preloadedTasks: Preloaded<typeof api.tracks.getTrack>;
 }) {
   const router = useRouter();
 
   const track = usePreloadedQuery(params.preloadedTasks);
   const trackMutation = useMutation(api.tracks.editTrack);
 
-  const filteredTrack = track.filter(
-    (track) => track.title === params.track
-  )[0];
-
   const [disabled, setDisabled] = useState(false);
   const [data, setData] = useState({
-    title: filteredTrack.title,
-    genre: filteredTrack.genre,
-    artists: filteredTrack.artists,
-    coverImage: filteredTrack.coverImage,
-    url: filteredTrack.url,
+    title: track?.title || "",
+    genre: track?.genre || "",
+    artists: track?.artists || ["", "", ""],
+    coverImage: track?.coverImage || "",
+    url: track?.url || "",
   });
 
   if (!track) return <></>;
@@ -47,7 +43,7 @@ export default function EditTrackForm(params: {
     e.preventDefault();
     setDisabled(true);
 
-    toast.info(`Editing track ${filteredTrack.title}...`);
+    toast.info(`Editing track ${track.title}...`);
 
     if (data.artists[1] === undefined) data.artists[1] = "";
     if (data.artists[2] === undefined) data.artists[2] = "";
