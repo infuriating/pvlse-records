@@ -40,7 +40,7 @@ export default function Artist(params: {
               width={384}
             />
           ) : (
-            <Skeleton className="h-full" />
+            <Skeleton className="h-24 w-24" />
           )}
           <div className="flex flex-col w-max gap-y-2 items-center">
             <h2 className="text-2xl font-bold">{artist.name}</h2>
@@ -69,11 +69,12 @@ export default function Artist(params: {
           {artist.description}
         </p>
       </section>
-      <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Tracks</h3>
-        <div className="grid grid-auto-fit gap-y-4 gap-x-6">
-          {artistTracks.length > 0 &&
-            artistTracks.map((track) => (
+
+      {artistTracks.length > 0 && (
+        <section className="mb-8">
+          <h3 className="text-xl font-semibold mb-4">Tracks</h3>
+          <div className="grid grid-auto-fit gap-y-4 gap-x-6">
+            {artistTracks.map((track) => (
               <Link
                 className="max-w-80"
                 key={track.title}
@@ -114,8 +115,9 @@ export default function Artist(params: {
                 </Card>
               </Link>
             ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </main>
   );
 }
