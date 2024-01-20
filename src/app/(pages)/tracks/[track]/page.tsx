@@ -1,7 +1,14 @@
-import React from "react";
+import { preloadQuery } from "convex/nextjs";
+import { api } from "../../../../../convex/_generated/api";
+import Track from "./components/Track";
 
-export default function page({ params }: { params: { track: string } }) {
-  const track = params.track;
+export default async function TrackWrapper({
+  params,
+}: {
+  params: { track: string };
+}) {
+  const track = params.track.replaceAll("%20", " ");
 
-  return <>{track}</>;
+  const preloadedTracks = await preloadQuery(api.tracks.getAll);
+  return <Track track={track} preloadedTracks={preloadedTracks} />;
 }
