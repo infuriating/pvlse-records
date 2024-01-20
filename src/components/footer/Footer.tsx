@@ -22,7 +22,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className="hidden lg:block absolute bottom-0 w-full">
+      <div className="hidden lg:block fixed bottom-0 w-full backdrop-blur-md">
         <Separator />
         <div className="py-4 px-6 flex items-center gap-x-6 w-full">
           <div className="flex gap-x-4 justify-center items-center">
