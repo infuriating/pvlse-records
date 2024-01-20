@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function DeleteTrackConfirmation(params: {
-  track: string;
   preloadedTasks: Preloaded<typeof api.tracks.getTrack>;
 }) {
   const router = useRouter();

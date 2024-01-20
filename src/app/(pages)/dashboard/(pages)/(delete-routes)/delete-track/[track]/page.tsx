@@ -12,7 +12,5 @@ export default async function TrackWrapper({
   const preloadedTasks = await preloadQuery(api.tracks.getTrack, {
     title: track,
   });
-  return (
-    <DeleteTrackConfirmation track={track} preloadedTasks={preloadedTasks} />
-  );
+  return <DeleteTrackConfirmation preloadedTasks={preloadedTasks} />;
 }
