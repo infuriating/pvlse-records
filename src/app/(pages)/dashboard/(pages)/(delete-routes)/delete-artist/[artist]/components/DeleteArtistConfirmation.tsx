@@ -10,16 +10,12 @@ import Link from "next/link";
 
 export default function DeleteArtistConfirmation(params: {
   artist: string;
-  preloadedTasks: Preloaded<typeof api.artists.getAll>;
+  preloadedTasks: Preloaded<typeof api.artists.getArtist>;
 }) {
   const router = useRouter();
 
   const artist = usePreloadedQuery(params.preloadedTasks);
   const artistMutation = useMutation(api.artists.deleteArtist);
-
-  const filteredArtist = artist.filter(
-    (artist) => artist.name === params.artist
-  )[0];
 
   const [disabled, setDisabled] = useState(false);
 
@@ -29,12 +25,12 @@ export default function DeleteArtistConfirmation(params: {
     e.preventDefault();
     setDisabled(true);
 
-    toast.info(`Deleting artist ${filteredArtist.name}...`);
+    toast.info(`Deleting artist ${artist.name}...`);
     artistMutation({
-      name: filteredArtist.name,
+      name: artist.name,
     });
 
-    toast.success(`Deleted artist ${filteredArtist.name}!`);
+    toast.success(`Deleted artist ${artist.name}!`);
     router.push("/dashboard");
   };
 
@@ -42,7 +38,7 @@ export default function DeleteArtistConfirmation(params: {
     <div className="flex flex-col items-center py-6 px-12">
       <p className="font-semibold text-center text-lg lg:text-4xl">
         Are you sure that you want to delete artist{" "}
-        <span className="font-bold">{filteredArtist.name}</span>?
+        <span className="font-bold">{artist.name}</span>?
       </p>
       <p className="lg:text-2xl font-medium text-muted-foreground">
         This action cannot be undone.
