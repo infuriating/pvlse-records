@@ -34,12 +34,14 @@ export default function Dashboard() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setDisabled(true);
 
     toast.info(`Adding track ${data.title}...`);
 
     if (data.artists[1] === undefined) data.artists[1] = "";
     if (data.artists[2] === undefined) data.artists[2] = "";
+    if (!data.filePath) return toast.error("No audio file uploaded yet!");
+
+    setDisabled(true);
 
     artistMutation({
       title: data.title,
