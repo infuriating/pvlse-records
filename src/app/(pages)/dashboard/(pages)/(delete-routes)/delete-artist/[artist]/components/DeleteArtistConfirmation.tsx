@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function DeleteArtistConfirmation(params: {
-  artist: string;
   preloadedTasks: Preloaded<typeof api.artists.getArtist>;
 }) {
   const router = useRouter();

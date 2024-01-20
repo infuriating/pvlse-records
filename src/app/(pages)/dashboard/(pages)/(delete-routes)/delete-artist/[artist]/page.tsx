@@ -12,7 +12,5 @@ export default async function ArtistWrapper({
   const preloadedTasks = await preloadQuery(api.artists.getArtist, {
     name: artist,
   });
-  return (
-    <DeleteArtistConfirmation artist={artist} preloadedTasks={preloadedTasks} />
-  );
+  return <DeleteArtistConfirmation preloadedTasks={preloadedTasks} />;
 }
