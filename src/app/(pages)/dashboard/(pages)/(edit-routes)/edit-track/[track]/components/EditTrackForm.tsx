@@ -11,6 +11,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UploadButton } from "@/utils/uploadthing";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function EditTrackForm(params: {
   track: string;
@@ -57,92 +64,105 @@ export default function EditTrackForm(params: {
 
   return (
     <div className="py-12 px-8 lg:flex flex-col items-center">
-      <p className="text-2xl font-semibold">Edit a Track</p>
-      <form
-        className="max-w-screen pt-6 lg:min-w-[920px] "
-        onSubmit={handleSubmit}
-      >
-        <Label htmlFor="name">Name</Label>
-        <Input
-          required
-          className="mt-1 mb-3"
-          type="text"
-          name="name"
-          value={data.title}
-          onChange={(e) => setData({ ...data, title: e.target.value })}
-        />
-        <Label htmlFor="artist1">Artists</Label>
-        <div className="flex flex-col lg:flex-row gap-x-6">
-          <Input
-            required
-            className="mt-1"
-            type="text"
-            name="social1"
-            value={data.artists[0]}
-            onChange={(e) =>
-              setData({
-                ...data,
-                artists: [e.target.value, data.artists[1], data.artists[2]],
-              })
-            }
-          />
-          <Input
-            className="mt-1"
-            type="text"
-            name="social2"
-            value={data.artists[1]}
-            onChange={(e) =>
-              setData({
-                ...data,
-                artists: [data.artists[0], e.target.value, data.artists[2]],
-              })
-            }
-          />
-          <Input
-            className="mt-1 mb-3"
-            type="text"
-            name="social3"
-            value={data.artists[2]}
-            onChange={(e) =>
-              setData({
-                ...data,
-                artists: [data.artists[0], data.artists[1], e.target.value],
-              })
-            }
-          />
-        </div>
-        <Label htmlFor="url">Spotify URL</Label>
-        <Input
-          className="mt-1 mb-3"
-          type="text"
-          name="url"
-          value={data.url}
-          onChange={(e) => setData({ ...data, url: e.target.value })}
-        />
-        <div className="pt-2 w-full flex justify-center">
-          <div className="flex gap-x-6 border py-2 px-4 w-max rounded-md">
-            {data.coverImage ? (
-              <Image
-                src={data.coverImage}
-                alt={data.title}
-                height={96}
-                width={96}
-              />
-            ) : (
-              <Skeleton className="h-24 w-24" />
-            )}
-            <UploadButton
-              endpoint="imageUploader"
-              onClientUploadComplete={(url) =>
-                setData({ ...data, coverImage: url[0].url })
-              }
+      <Card>
+        <CardHeader>
+          <CardTitle>Edit Track</CardTitle>
+          <CardDescription>
+            Edit an existing track in the database
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form
+            className="max-w-screen lg:min-w-[920px] "
+            onSubmit={handleSubmit}
+          >
+            <Label htmlFor="name">Name</Label>
+            <Input
+              required
+              className="mt-1 mb-3"
+              type="text"
+              name="name"
+              value={data.title}
+              onChange={(e) => setData({ ...data, title: e.target.value })}
             />
-          </div>
-        </div>
-        <Button disabled={disabled} className="w-full mt-4">
-          Edit Track
-        </Button>
-      </form>
+            <Label htmlFor="artist1">Artists</Label>
+            <div className="flex flex-col lg:flex-row gap-x-6">
+              <Input
+                required
+                className="mt-1"
+                type="text"
+                name="social1"
+                value={data.artists[0]}
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    artists: [e.target.value, data.artists[1], data.artists[2]],
+                  })
+                }
+              />
+              <Input
+                className="mt-1"
+                type="text"
+                name="social2"
+                value={data.artists[1]}
+                placeholder="ISXRO"
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    artists: [data.artists[0], e.target.value, data.artists[2]],
+                  })
+                }
+              />
+              <Input
+                className="mt-1 mb-3"
+                type="text"
+                name="social3"
+                value={data.artists[2]}
+                placeholder="inf"
+                onChange={(e) =>
+                  setData({
+                    ...data,
+                    artists: [data.artists[0], data.artists[1], e.target.value],
+                  })
+                }
+              />
+            </div>
+            <Label htmlFor="url">Spotify URL</Label>
+            <Input
+              className="mt-1 mb-3"
+              type="text"
+              name="url"
+              value={data.url}
+              placeholder="https://open.spotify.com/track/2rCVGFo2htxWlkDwm3klAB"
+              onChange={(e) => setData({ ...data, url: e.target.value })}
+            />
+            <div className="pt-2 w-full">
+              <div className="flex gap-x-6 border py-2 px-4 justify-center rounded-md">
+                {data.coverImage ? (
+                  <Image
+                    className="rounded-md border object-cover h-24 w-24"
+                    src={data.coverImage}
+                    alt={data.title}
+                    height={96}
+                    width={96}
+                  />
+                ) : (
+                  <Skeleton className="h-24 w-24" />
+                )}
+                <UploadButton
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(url) =>
+                    setData({ ...data, coverImage: url[0].url })
+                  }
+                />
+              </div>
+            </div>
+            <Button disabled={disabled} className="w-full mt-4">
+              Edit Track
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
