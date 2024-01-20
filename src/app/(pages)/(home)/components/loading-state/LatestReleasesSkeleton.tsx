@@ -9,10 +9,10 @@ export default function LatestReleasesSkeleton() {
         Latest Releases
       </p>
       <div className="grid grid-cols-2 gap-y-6 lg:gap-y-0 lg:grid-cols-4 w-max gap-x-6 p-4 bg-muted rounded-b-md">
-        <Track name="..." artists={["..."]} image="" url="" />
-        <Track name="..." artists={["..."]} image="" url="" />
-        <Track name="..." artists={["..."]} image="" url="" />
-        <Track name="..." artists={["..."]} image="" url="" />
+        <Track name="..." artists={["..."]} image="" url="" genre="..." />
+        <Track name="..." artists={["..."]} image="" url="" genre="..." />
+        <Track name="..." artists={["..."]} image="" url="" genre="..." />
+        <Track name="..." artists={["..."]} image="" url="" genre="..." />
       </div>
     </div>
   );
