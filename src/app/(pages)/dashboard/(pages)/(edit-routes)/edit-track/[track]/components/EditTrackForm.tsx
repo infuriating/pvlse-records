@@ -74,12 +74,12 @@ export default function EditTrackForm(params: {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="Title">Title</Label>
             <Input
               required
               className="mt-1 mb-3"
               type="text"
-              name="name"
+              name="title"
               value={data.title}
               onChange={(e) => setData({ ...data, title: e.target.value })}
             />
