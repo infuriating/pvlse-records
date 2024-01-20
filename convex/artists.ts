@@ -8,6 +8,20 @@ export const getAll = query({
   },
 });
 
+export const getArtist = query({
+  args: {
+    name: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const artist = await ctx.db
+      .query("artist")
+      .filter((q) => q.eq(q.field("name"), args.name))
+      .first();
+
+    return artist;
+  },
+});
+
 export const addArtist = mutation({
   args: {
     description: v.string(),

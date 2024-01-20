@@ -8,6 +8,20 @@ export const getAll = query({
   },
 });
 
+export const getTrack = query({
+  args: {
+    title: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const track = await ctx.db
+      .query("track")
+      .filter((q) => q.eq(q.field("title"), args.title))
+      .first();
+
+    return track;
+  },
+});
+
 export const getLatestFour = query({
   args: {},
   handler: async (ctx) => {
