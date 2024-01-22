@@ -54,12 +54,14 @@ export const editTrack = mutation(
   async (
     { db },
     {
+      trackTitle,
       artists,
       title,
       genre,
       coverImage,
       url,
     }: {
+      trackTitle: string;
       artists: string[];
       title: string;
       genre: string;
@@ -69,7 +71,7 @@ export const editTrack = mutation(
   ) => {
     const document = await db
       .query("track")
-      .filter((q) => q.eq(q.field("title"), title))
+      .filter((q) => q.eq(q.field("title"), trackTitle))
       .first();
 
     if (!document) return;

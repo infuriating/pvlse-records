@@ -11,10 +11,12 @@ export const updateFeaturedArtist = mutation(
   async (
     { db },
     {
+      featuredArtistName,
       name,
       socials,
       image,
     }: {
+      featuredArtistName: string;
       name: string;
       socials: string[];
       image: string | undefined;
@@ -22,7 +24,7 @@ export const updateFeaturedArtist = mutation(
   ) => {
     const document = await db
       .query("featured_artist")
-      .filter((q) => q.eq(q.field("name"), name))
+      .filter((q) => q.eq(q.field("name"), featuredArtistName))
       .first();
 
     if (!document) return;

@@ -50,6 +50,7 @@ export default function UpdateFeaturedArtist(params: {
     if (data.socials[2] === undefined) data.socials[2] = "";
 
     await featuredArtistMutation({
+      featuredArtistName: artist.name,
       name: data.name,
       image: data.image,
       socials: data.socials,

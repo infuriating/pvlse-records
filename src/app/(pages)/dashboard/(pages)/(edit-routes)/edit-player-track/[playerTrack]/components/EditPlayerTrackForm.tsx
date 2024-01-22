@@ -51,6 +51,7 @@ export default function EditPlayerTrackForm(params: {
     setDisabled(true);
 
     await playerTrackMutation({
+      playerTrackTitle: params.playerTrack,
       title: data.title,
       artists: data.artists,
       coverImage: data.coverImage,

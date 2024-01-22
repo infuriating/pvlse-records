@@ -47,12 +47,14 @@ export const editArtist = mutation(
   async (
     { db },
     {
+      artistName,
       name,
       description,
       socials,
       image,
       spotifyURL,
     }: {
+      artistName: string;
       name: string;
       description: string;
       socials: string[];
@@ -60,9 +62,11 @@ export const editArtist = mutation(
       spotifyURL: string | undefined;
     }
   ) => {
+    console.log(name, description, socials, image, spotifyURL);
+
     const document = await db
       .query("artist")
-      .filter((q) => q.eq(q.field("name"), name))
+      .filter((q) => q.eq(q.field("name"), artistName))
       .first();
 
     if (!document) return;

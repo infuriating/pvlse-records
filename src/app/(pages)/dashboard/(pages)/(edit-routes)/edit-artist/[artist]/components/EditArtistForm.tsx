@@ -49,6 +49,7 @@ export default function EditArtistForm(params: {
     if (data.socials[2] === undefined) data.socials[2] = "";
 
     await artistMutation({
+      artistName: params.artist,
       name: data.name,
       description: data.description,
       socials: data.socials,

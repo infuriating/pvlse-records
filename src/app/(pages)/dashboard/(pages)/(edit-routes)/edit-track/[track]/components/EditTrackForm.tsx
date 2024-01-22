@@ -49,6 +49,7 @@ export default function EditTrackForm(params: {
     if (data.artists[2] === undefined) data.artists[2] = "";
 
     await trackMutation({
+      trackTitle: params.track,
       title: data.title,
       genre: data.genre,
       artists: data.artists,
