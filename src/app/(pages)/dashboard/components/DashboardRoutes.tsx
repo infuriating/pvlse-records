@@ -9,6 +9,7 @@ export default function DashboardRoutes() {
     <main className="flex-1 overflow-auto p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <section>
+          <p className="mb-2 font-semibold text-lg md:hidden">Add Items</p>
           {addRoutes.map((route) => (
             <Link key={route.name} href={route.path}>
               <div className="mb-6 flex flex-col items-center justify-center p-4 border rounded-lg shadow-sm transition-all hover:bg-muted">
@@ -22,6 +23,7 @@ export default function DashboardRoutes() {
           ))}
         </section>
         <section>
+          <p className="mb-2 font-semibold text-lg md:hidden">Edit Items</p>
           {editRoutes.map((route) => (
             <Link key={route.name} href={route.path}>
               <div className="mb-6 flex flex-col items-center justify-center p-4 border rounded-lg shadow-sm transition-all hover:bg-muted">
@@ -35,6 +37,7 @@ export default function DashboardRoutes() {
           ))}
         </section>
         <section>
+          <p className="mb-2 font-semibold text-lg md:hidden">Delete Items</p>
           {deleteRoutes.map((route) => (
             <Link key={route.name} href={route.path}>
               <div className="mb-6 flex flex-col items-center justify-center p-4 border rounded-lg shadow-sm transition-all hover:bg-muted">
