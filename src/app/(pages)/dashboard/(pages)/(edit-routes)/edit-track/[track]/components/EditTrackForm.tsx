@@ -74,7 +74,10 @@ export default function EditTrackForm(params: {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="Title">Title</Label>
+            <Label htmlFor="Title">
+              <span className="text-red-400">* </span>
+              Title
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -83,7 +86,10 @@ export default function EditTrackForm(params: {
               value={data.title}
               onChange={(e) => setData({ ...data, title: e.target.value })}
             />
-            <Label htmlFor="genre">Genre</Label>
+            <Label htmlFor="genre">
+              <span className="text-red-400">* </span>
+              Genre
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -94,7 +100,9 @@ export default function EditTrackForm(params: {
               onChange={(e) => setData({ ...data, genre: e.target.value })}
             />
             <Label htmlFor="artist1">Artists</Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"

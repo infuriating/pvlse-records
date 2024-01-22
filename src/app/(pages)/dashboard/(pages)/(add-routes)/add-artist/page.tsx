@@ -66,7 +66,10 @@ export default function Dashboard() {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">
+              <span className="text-red-400">* </span>
+              Name
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -76,7 +79,10 @@ export default function Dashboard() {
               placeholder="Artist Name"
               onChange={(e) => setData({ ...data, name: e.target.value })}
             />
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">
+              <span className="text-red-400">* </span>
+              Description
+            </Label>
             <Textarea
               required
               className="mt-1 mb-3 resize-none"
@@ -91,7 +97,9 @@ export default function Dashboard() {
               Socials{" "}
               <span className="text-muted-foreground text-xs">(url)</span>
             </Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"

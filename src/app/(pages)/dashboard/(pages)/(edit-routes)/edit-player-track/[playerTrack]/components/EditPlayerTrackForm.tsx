@@ -76,7 +76,10 @@ export default function EditPlayerTrackForm(params: {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">
+              <span className="text-red-400">* </span>
+              Title
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -86,7 +89,10 @@ export default function EditPlayerTrackForm(params: {
               placeholder="Title"
               onChange={(e) => setData({ ...data, title: e.target.value })}
             />
-            <Label htmlFor="genre">Genre</Label>
+            <Label htmlFor="genre">
+              <span className="text-red-400">* </span>
+              Genre
+            </Label>
             <Input
               required
               className="mt-1 mb-3 resize-none"
@@ -96,7 +102,9 @@ export default function EditPlayerTrackForm(params: {
               onChange={(e) => setData({ ...data, genre: e.target.value })}
             />
             <Label htmlFor="artist1">Artists</Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"
@@ -139,7 +147,9 @@ export default function EditPlayerTrackForm(params: {
               />
             </div>
             <div className="pt-2 w-full">
-              <div className="flex gap-x-6 border py-4 px-4 w-full font-semibold justify-center items-center rounded-md">
+              <div className="relative flex gap-x-6 border py-4 px-4 w-full font-semibold justify-center items-center rounded-md">
+                <span className="absolute left-0 -top-2 text-red-400">* </span>
+
                 {data.filePath ? (
                   <p>{data.filePath}</p>
                 ) : (
