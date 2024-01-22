@@ -64,7 +64,7 @@ export default function EditArtistForm(params: {
     <div className="py-12 px-8 lg:flex flex-col items-center">
       <Card>
         <CardHeader>
-          <CardTitle>Edit Track</CardTitle>
+          <CardTitle>Edit Artist</CardTitle>
           <CardDescription>
             Edit an existing artist in the database
           </CardDescription>
