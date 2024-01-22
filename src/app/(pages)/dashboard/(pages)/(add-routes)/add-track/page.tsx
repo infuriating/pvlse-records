@@ -66,7 +66,10 @@ export default function Dashboard() {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">
+              <span className="text-red-400">* </span>
+              Title
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -76,7 +79,10 @@ export default function Dashboard() {
               placeholder="Track Title"
               onChange={(e) => setData({ ...data, title: e.target.value })}
             />
-            <Label htmlFor="genre">Genre</Label>
+            <Label htmlFor="genre">
+              <span className="text-red-400">* </span>
+              Genre
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -87,7 +93,9 @@ export default function Dashboard() {
               onChange={(e) => setData({ ...data, genre: e.target.value })}
             />
             <Label htmlFor="artist1">Artists</Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"

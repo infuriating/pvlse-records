@@ -65,7 +65,7 @@ export default function EditArtistForm(params: {
     <div className="py-12 px-8 lg:flex flex-col items-center">
       <Card>
         <CardHeader>
-          <CardTitle>Edit Track</CardTitle>
+          <CardTitle>Edit Artist</CardTitle>
           <CardDescription>
             Edit an existing artist in the database
           </CardDescription>
@@ -75,7 +75,10 @@ export default function EditArtistForm(params: {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">
+              <span className="text-red-400">* </span>
+              Name
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -84,7 +87,10 @@ export default function EditArtistForm(params: {
               value={data.name}
               onChange={(e) => setData({ ...data, name: e.target.value })}
             />
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">
+              <span className="text-red-400">* </span>
+              Description
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -99,7 +105,9 @@ export default function EditArtistForm(params: {
               Socials{" "}
               <span className="text-muted-foreground text-xs">(url)</span>
             </Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"

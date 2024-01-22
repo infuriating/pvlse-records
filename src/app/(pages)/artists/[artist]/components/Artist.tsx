@@ -10,6 +10,8 @@ import Link from "next/link";
 import React from "react";
 import { api } from "../../../../../../convex/_generated/api";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRightCircleIcon } from "lucide-react";
 
 export default function Artist(params: {
   artist: string;
@@ -78,7 +80,7 @@ export default function Artist(params: {
                 href={`/tracks/${track.title}`}
               >
                 <Card>
-                  <CardContent className="relative overflow-hidden">
+                  <CardContent className="relative overflow-hidden flex justify-between">
                     {track.coverImage ? (
                       <Image
                         className="h-36 w-36 mt-4"
@@ -90,6 +92,11 @@ export default function Artist(params: {
                     ) : (
                       <Skeleton className="h-36 w-36 mt-4" />
                     )}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <Button className="w-full" variant="secondary">
+                        <ArrowRightCircleIcon className="h-6 w-6" />
+                      </Button>
+                    </div>
                   </CardContent>
                   <CardFooter className="flex items-center justify-between">
                     <div className="space-y-1">

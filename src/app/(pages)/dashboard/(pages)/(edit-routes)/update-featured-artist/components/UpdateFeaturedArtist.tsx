@@ -72,7 +72,10 @@ export default function UpdateFeaturedArtist(params: {
             className="max-w-screen lg:min-w-[920px] "
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">
+              <span className="text-red-400">* </span>
+              Name
+            </Label>
             <Input
               required
               className="mt-1 mb-3"
@@ -82,7 +85,9 @@ export default function UpdateFeaturedArtist(params: {
               onChange={(e) => setData({ ...data, name: e.target.value })}
             />
             <Label htmlFor="social1">Socials</Label>
-            <div className="flex flex-col lg:flex-row gap-x-6">
+            <div className="relative flex flex-col lg:flex-row gap-x-6">
+              <span className="absolute text-red-400">* </span>
+
               <Input
                 required
                 className="mt-1"
