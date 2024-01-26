@@ -66,7 +66,6 @@ export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
 
   const togglePlayPause = () => {
     setPlaying(!playing);
-    console.log(track.filePath);
 
     if (playing) {
       audioRef.current.pause();
@@ -119,6 +118,11 @@ export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
     }
   };
 
+  const setCurrentTime = (currentTime: number) => {
+    audioRef.current.currentTime = currentTime;
+    setTrackTime(currentTime);
+  };
+
   return (
     <div className="flex relative w-full">
       {track.coverImage ? (
@@ -160,6 +164,7 @@ export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
           setShuffled={setShuffled}
           repeat={repeat}
           setRepeat={setRepeat}
+          setCurrentTime={setCurrentTime}
         />
       </div>
       <div className="flex gap-x-2 items-center absolute right-0 bottom-0 h-20">
