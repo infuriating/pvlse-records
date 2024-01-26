@@ -1,9 +1,16 @@
+"use client";
+
+import { Progress } from "@/components/ui/progress";
+import { useRef, useState } from "react";
+
 export default function TrackProgression({
   trackTime,
   currentTime,
+  setCurrentTime,
 }: {
   trackTime: number;
   currentTime: number;
+  setCurrentTime: (currentTime: number) => void;
 }) {
   const getCurrentTime = (currentTime: number) => {
     const minutes = Math.floor(currentTime / 60);
@@ -28,14 +35,15 @@ export default function TrackProgression({
   return (
     <div className="flex gap-x-2 items-center text-xs font-medium">
       <p>{getCurrentTime(currentTime)}</p>
-      <div className="w-64">
-        <div className="relative w-full bg-muted h-2 rounded-lg transition-all cursor-pointer">
-          <div
-            style={{ width: `${getTrackProgress(currentTime, trackTime)}%` }}
-            className="absolute bg-primary z-10 h-2 rounded-lg transition-all"
-          />
-        </div>
-      </div>
+      <Progress
+        className="w-64 h-2 cursor-pointer"
+        value={getTrackProgress(currentTime, trackTime)}
+        onClick={(e) => {
+          setCurrentTime(
+            (e.nativeEvent.offsetX / e.currentTarget.offsetWidth) * trackTime
+          );
+        }}
+      />
       <p>{getTrackTime(trackTime)}</p>
     </div>
   );
