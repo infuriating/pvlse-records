@@ -19,6 +19,7 @@ export default function Player({
   setShuffled,
   repeat,
   setRepeat,
+  setCurrentTime,
 }: {
   playing: boolean;
   togglePlayPause: () => void;
@@ -29,12 +30,17 @@ export default function Player({
   repeat: boolean;
   setShuffled: React.Dispatch<React.SetStateAction<boolean>>;
   setRepeat: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentTime: (currentTime: number) => void;
 }) {
   const buttonClassNames = "h-6 cursor-pointer transition-all hover:opacity-60";
 
   return (
     <div className="flex flex-col gap-y-4">
-      <TrackProgression trackTime={trackTime} currentTime={currentTime} />
+      <TrackProgression
+        trackTime={trackTime}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+      />
       <div className="flex gap-x-6 justify-center items-center">
         <FontAwesomeIcon
           onClick={() => {
