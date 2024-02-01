@@ -122,6 +122,7 @@ export default function UpdateFeaturedArtist(params: {
               type="text"
               name="name"
               value={data.name}
+              readOnly
             />
             <Label htmlFor="social1">Socials</Label>
             <div className="relative flex flex-col lg:flex-row gap-x-6">
@@ -131,6 +132,7 @@ export default function UpdateFeaturedArtist(params: {
                 type="text"
                 name="social1"
                 value={data.socials[0]}
+                readOnly
               />
               <Input
                 className="mt-1"
@@ -138,6 +140,7 @@ export default function UpdateFeaturedArtist(params: {
                 name="social2"
                 value={data.socials[1]}
                 placeholder="ISXRO"
+                readOnly
               />
               <Input
                 className="mt-1 mb-3"
@@ -145,6 +148,7 @@ export default function UpdateFeaturedArtist(params: {
                 name="social3"
                 value={data.socials[2]}
                 placeholder="inf"
+                readOnly
               />
             </div>
             <div className="pt-2 w-full">
