@@ -168,7 +168,7 @@ export default function UpdateFeaturedArtist(params: {
           </form>
         </CardContent>
       </Card>
-      <div className="mb-24" />
+      <div className="lg:mb-24" />
     </div>
   );
 }
