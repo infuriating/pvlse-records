@@ -18,12 +18,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { api } from "../../../../../../../../convex/_generated/api";
+import { Separator } from "@/components/ui/separator";
 
 export default function UpdateFeaturedArtist(params: {
   preloadedTasks: Preloaded<typeof api.featuredArtist.getFeaturedArtist>;
+  preloadedArtists: Preloaded<typeof api.artists.getAll>;
 }) {
   const router = useRouter();
 
+  const artists = usePreloadedQuery(params.preloadedArtists);
   const featuredArtist = usePreloadedQuery(params.preloadedTasks);
   const featuredArtistMutation = useMutation(
     api.featuredArtist.updateFeaturedArtist
@@ -39,6 +42,11 @@ export default function UpdateFeaturedArtist(params: {
   });
 
   if (!artist) return <></>;
+
+  const setFeaturedArtistData = (data: any) => {
+    toast.info(`Selected artist ${data.name}`);
+    setData(data);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,7 +69,42 @@ export default function UpdateFeaturedArtist(params: {
   };
 
   return (
-    <div className="py-12 px-8 lg:flex flex-col items-center">
+    <div className="py-8 px-4 lg:flex flex-col items-center">
+      <Card className="py-8 px-12">
+        <CardTitle>Select an artist</CardTitle>
+        <CardDescription>
+          Select an artist to set as the featured artist
+        </CardDescription>
+        <CardContent className="grid grid-auto-fit-md mt-4">
+          <div className="flex gap-x-4 gap-y-2 justify-center">
+            {artists.map((artist) => (
+              <div
+                className="flex flex-col gap-y-2 items-center"
+                key={artist._id}
+              >
+                {artist.image ? (
+                  <Image
+                    src={artist.image}
+                    alt={artist.name}
+                    height={96}
+                    width={96}
+                  />
+                ) : (
+                  <Skeleton className="h-24 w-24" />
+                )}
+                <Button
+                  key={artist.name}
+                  className="w-full"
+                  onClick={() => setFeaturedArtistData(artist)}
+                >
+                  {artist.name}
+                </Button>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+      <Separator className="w-96 my-4" />
       <Card>
         <CardHeader>
           <CardTitle>Update Featured Artist</CardTitle>
@@ -69,37 +112,25 @@ export default function UpdateFeaturedArtist(params: {
         </CardHeader>
         <CardContent>
           <form
-            className="max-w-screen lg:min-w-[920px] "
+            className="max-w-screen lg:min-w-[920px]"
             onSubmit={handleSubmit}
           >
-            <Label htmlFor="name">
-              <span className="text-red-400">* </span>
-              Name
-            </Label>
+            <Label htmlFor="name"> Name</Label>
             <Input
               required
               className="mt-1 mb-3"
               type="text"
               name="name"
               value={data.name}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
             />
             <Label htmlFor="social1">Socials</Label>
             <div className="relative flex flex-col lg:flex-row gap-x-6">
-              <span className="absolute text-red-400">* </span>
-
               <Input
                 required
                 className="mt-1"
                 type="text"
                 name="social1"
                 value={data.socials[0]}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    socials: [e.target.value, data.socials[1], data.socials[2]],
-                  })
-                }
               />
               <Input
                 className="mt-1"
@@ -107,12 +138,6 @@ export default function UpdateFeaturedArtist(params: {
                 name="social2"
                 value={data.socials[1]}
                 placeholder="ISXRO"
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    socials: [data.socials[0], e.target.value, data.socials[2]],
-                  })
-                }
               />
               <Input
                 className="mt-1 mb-3"
@@ -120,12 +145,6 @@ export default function UpdateFeaturedArtist(params: {
                 name="social3"
                 value={data.socials[2]}
                 placeholder="inf"
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    socials: [data.socials[0], data.socials[1], e.target.value],
-                  })
-                }
               />
             </div>
             <div className="pt-2 w-full">
@@ -141,12 +160,6 @@ export default function UpdateFeaturedArtist(params: {
                 ) : (
                   <Skeleton className="h-24 w-24" />
                 )}
-                <UploadButton
-                  endpoint="imageUploader"
-                  onClientUploadComplete={(url) =>
-                    setData({ ...data, image: url[0].url })
-                  }
-                />
               </div>
             </div>
             <Button disabled={disabled} className="w-full mt-4">
@@ -155,6 +168,7 @@ export default function UpdateFeaturedArtist(params: {
           </form>
         </CardContent>
       </Card>
+      <div className="mb-24" />
     </div>
   );
 }
