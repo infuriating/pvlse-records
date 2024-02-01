@@ -33,6 +33,12 @@ export default function FooterTrack({ playerTracks }: { playerTracks: any }) {
     };
 
     const endedHandler = () => {
+      if (repeat) {
+        audioCurrent.currentTime = 0;
+        audioCurrent.play();
+        setTrackTime(0);
+        return;
+      }
       handleTrackChange("next");
     };
 
