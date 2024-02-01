@@ -6,5 +6,11 @@ export default async function UpdateFeaturedArtistWrapper() {
   const preloadedTasks = await preloadQuery(
     api.featuredArtist.getFeaturedArtist
   );
-  return <UpdateFeaturedArtist preloadedTasks={preloadedTasks} />;
+  const preloadedArtists = await preloadQuery(api.artists.getAll);
+  return (
+    <UpdateFeaturedArtist
+      preloadedTasks={preloadedTasks}
+      preloadedArtists={preloadedArtists}
+    />
+  );
 }
