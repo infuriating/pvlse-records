@@ -32,6 +32,7 @@ export default function Dashboard() {
     spotifyURL: "",
     image: "",
   });
+  const [scheduleDate, setScheduleDate] = useState<Date | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,6 +53,32 @@ export default function Dashboard() {
 
     router.push("/dashboard");
     toast.success(`Artist ${name} has been added to the database!`);
+  };
+
+  const scheduleNewArtist = () => {
+    if (scheduleDate === null) {
+      toast.error("Please select a date to schedule the artist for!");
+      return;
+    }
+    setDisabled(true);
+
+    toast.info(`Scheduling artist ${name}...`);
+
+    if (data.socials[1] === undefined) data.socials[1] = "";
+    if (data.socials[2] === undefined) data.socials[2] = "";
+
+    console.log(scheduleDate);
+
+    // artistMutation({
+    //   name: data.name,
+    //   description: data.description,
+    //   socials: data.socials,
+    //   spotifyURL: data.spotifyURL,
+    //   image: data.image,
+    // });
+
+    // router.push("/dashboard");
+    // toast.success(`Artist ${name} has been added to the database!`);
   };
 
   return (
@@ -171,9 +198,23 @@ export default function Dashboard() {
                 />
               </div>
             </div>
-            <Button disabled={disabled} className="w-full mt-4">
-              Add Artist
-            </Button>
+            <div className="flex flex-col lg:flex-row gap-x-2 w-full">
+              <Button disabled={disabled} className="w-full mt-4">
+                Add Artist
+              </Button>
+              <Button
+                disabled={disabled}
+                variant={"outline"}
+                className="w-full mt-4 flex gap-x-2"
+              >
+                Schedule for{" "}
+                <Input
+                  className="z-10"
+                  type="date"
+                  onChange={(e) => setScheduleDate(new Date(e.target.value))}
+                />
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
